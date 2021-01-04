@@ -1,0 +1,15 @@
+
+		// Intersecting ground plane with the cursor's ray.
+		float t = camWorldPos.y / (camWorldPos.y - cursorWorldPos.y);
+		if (camWorldPos.y <= 0.0f || cursorWorldPos.y <= 0.0f || t <= 0.0f) m_HasIntersection = false;
+		else
+		{
+			m_WorldIntersection = camWorldPos + (cursorWorldPos - camWorldPos) * t;
+
+			printf("plane: %f %f %f\n", m_WorldIntersection.x, m_WorldIntersection.y, m_WorldIntersection.z);
+			debW = m_WorldIntersection;
+
+			SetIntersectionToGrid(m_BlockIndexSize.x, fieldWorldSize, countFields.x, m_WorldIntersection.x, m_Start.x, m_End.x);
+			SetIntersectionToGrid(m_BlockIndexSize.y, fieldWorldSize, countFields.y, m_WorldIntersection.z, m_Start.y, m_End.y);
+			m_HasIntersection = (m_Start.x < (int)countFields.x && m_Start.y < (int)countFields.y && m_End.x >= 0 && m_End.y >= 0);
+		}

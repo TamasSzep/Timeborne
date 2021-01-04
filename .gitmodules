@@ -1,0 +1,3 @@
+[submodule "Internal/Framework"]
+	path = Internal/Framework
+	url = https://github.com/TamasSzep/Framework2.git

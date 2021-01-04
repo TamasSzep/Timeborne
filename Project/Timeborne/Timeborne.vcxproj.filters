@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\InGame">
+      <UniqueIdentifier>{de6bfbb9-9cef-4754-ae6a-02b447d4ee8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelEditor">
+      <UniqueIdentifier>{8d636453-c5ab-4fbf-a0a9-de6ca2356977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{cf1e137e-0e4d-450e-9cdd-5f66f9c7770a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{87950a33-afad-4552-b405-a5527af1eaa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render">
+      <UniqueIdentifier>{6b23478d-ff57-4d21-922f-be3d760aa5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Terrain">
+      <UniqueIdentifier>{0726c4d2-3212-40d2-b049-0a66924b6cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\GameObjects">
+      <UniqueIdentifier>{cfbbbb35-09fd-40f5-8276-c7c1d7decf53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render\Hud">
+      <UniqueIdentifier>{a989baf6-4359-4cc8-bb67-f0274fad39f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameCreation">
+      <UniqueIdentifier>{98d2558a-9153-4936-ab4e-612139c90040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{8b9086df-353c-42bd-8e7d-a64b5fbcb056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelEditor\GameObjects">
+      <UniqueIdentifier>{78bdd319-7d68-4061-9e14-868804d2b20d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Declarations">
+      <UniqueIdentifier>{80dfba74-5605-4547-aab2-4a5c703383d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{45290876-77a4-483c-a896-3227f9f0de89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainMenu">
+      <UniqueIdentifier>{baa8f41b-86d1-4396-b567-901adf0b7778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelEditor\Terrain">
+      <UniqueIdentifier>{31ecd8c0-bbc2-438c-afe3-f5a0166e26f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\GameState">
+      <UniqueIdentifier>{f7ce65a5-f799-4a84-aa66-1ec5982f3cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\GameCamera">
+      <UniqueIdentifier>{997cac84-6ed3-4299-9fd0-81f793ef7a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model">
+      <UniqueIdentifier>{e402317d-5916-4997-bb7e-2b56655e126f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\View">
+      <UniqueIdentifier>{34fb9efa-a4a7-4a7f-85bf-cef7c15f4beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\Terrain">
+      <UniqueIdentifier>{3c9489c5-dfff-4f00-8795-c10a2f60fb5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\View\Terrain">
+      <UniqueIdentifier>{2885d854-b3f0-4c8c-b401-1ed0a1cd2ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\View\GameObjects">
+      <UniqueIdentifier>{3484f915-4922-4138-a859-78568e9f7933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Controller">
+      <UniqueIdentifier>{25ab4184-ca06-4018-be57-9e904284eaa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\GameObjects">
+      <UniqueIdentifier>{5bac5a79-1d3a-415b-9257-3cf95f3bc390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataStructures">
+      <UniqueIdentifier>{44f61919-3ee8-4b59-aa45-b3868a55a852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Controller\GameObjects">
+      <UniqueIdentifier>{289552a1-294a-43cd-ba17-4b7d9477f4c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\GameObjects\ObjectToNodeMapping">
+      <UniqueIdentifier>{f3600b6c-be78-41ef-bce6-adda3e68f4c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\GameObjects\PathFinding">
+      <UniqueIdentifier>{296c727a-ca82-4a31-91bf-0f4c2b6c0bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\GameObjects\Prototype">
+      <UniqueIdentifier>{9e948890-4ecb-4a4d-a85e-7f8a97913de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InGame\Model\GameObjects\Prototype\Units">
+      <UniqueIdentifier>{7dbb5984-e970-46ba-84e8-d2c402ddf028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\DX11">
+      <UniqueIdentifier>{3aec2466-d1e6-46eb-ab45-71ad4d3f4948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\DX11\GameObjects">
+      <UniqueIdentifier>{c6fce848-7672-4d6c-81ce-30a57eb31aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\DX11\LevelEditor">
+      <UniqueIdentifier>{17282488-a268-4fac-a01f-3bfbe71b06cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\HLSL">
+      <UniqueIdentifier>{127807af-ba87-4771-8906-cfe670856e0a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Timeborne\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\MainApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\InGame.cpp">
+      <Filter>Source Files\InGame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\LevelEditor.cpp">
+      <Filter>Source Files\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Misc\UserConfiguration.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Misc\ScreenResolution.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\CommandLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.cpp">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.cpp">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.cpp">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.cpp">
+      <Filter>Source Files\Render\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InputHandling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.cpp">
+      <Filter>Source Files\Render\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\NewGameObjectsTool.cpp">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\LevelEditorComponent.cpp">
+      <Filter>Source Files\LevelEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorModel.cpp">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GUI\NuklearGUI.c">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\ApplicationComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\MainMenu\MainMenu.cpp">
+      <Filter>Source Files\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.cpp">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainEditing.cpp">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainSpadeTool.cpp">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\ManageGameObjectsTool.cpp">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.cpp">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.cpp">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.cpp">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\GameCreationData.cpp">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.cpp">
+      <Filter>Source Files\InGame\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.cpp">
+      <Filter>Source Files\InGame\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\InGameView.cpp">
+      <Filter>Source Files\InGame\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\FieldHeightQuadTree.cpp">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\Terrain.cpp">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainTree.cpp">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectId.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\GameObjectInGameView.cpp">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\Terrain\TerrainInGameView.cpp">
+      <Filter>Source Files\InGame\View\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorView.cpp">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainLevelEditorView.cpp">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\HealthPointBarView.cpp">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\PathView.cpp">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectRoute.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommands.cpp">
+      <Filter>Source Files\InGame\Controller\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\InGameController.cpp">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\CommandListProcessor.cpp">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\CommandList.cpp">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\InGameModel.cpp">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Level.cpp">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GameObjectTerrainTreeNodeMapping.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\ObjectToNodeMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GroundObjectTerrainTreeNodeMapping.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\ObjectToNodeMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\AStar.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinder.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinding.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\SimpleHierarchicalPathFinder.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObject.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightSubsystem.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectModel.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectMovementSubsystem.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectPose.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectSubsystem.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectWorkSubsystem.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\BottomControl.cpp">
+      <Filter>Source Files\InGame\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\ControllerGameState.cpp">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommand.cpp">
+      <Filter>Source Files\InGame\Controller\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.cpp">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\PlayerData.cpp">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectMovementPrototype.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectPrototype.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestCar.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestInfantryUnit.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightData.cpp">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.cpp">
+      <Filter>Source Files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\AttackLineView.cpp">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Timeborne\MainApplication.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\ApplicationComponent.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\InGame.h">
+      <Filter>Source Files\InGame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\LevelEditor.h">
+      <Filter>Source Files\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Misc\UserConfiguration.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Misc\ScreenResolution.h">
+      <Filter>Source Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\LevelEditorComponent.h">
+      <Filter>Source Files\LevelEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Console.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Logger.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\CommandLine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.h">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.h">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.h">
+      <Filter>Source Files\Render\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Settings.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.h">
+      <Filter>Source Files\Render\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InputHandling.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.h">
+      <Filter>Source Files\Render\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\GameCreationData.h">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Math\SqrtExtendedIntegerRing.hpp">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\NewGameObjectsTool.h">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorModel.h">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\DirectX11RenderDeclarations.h">
+      <Filter>Source Files\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\EngineBuildingBlocksDeclarations.h">
+      <Filter>Source Files\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\CoreDeclarations.h">
+      <Filter>Source Files\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\GUIConstants.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearGUI.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearHelper.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\TimeborneGUI.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearInclude.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearD3D11Include.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\MainMenu\MainMenu.h">
+      <Filter>Source Files\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.h">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainEditing.h">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainFieldBlockHeightIterator.h">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainSpadeTool.h">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\ManageGameObjectsTool.h">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.h">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.h">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.h">
+      <Filter>Source Files\InGame\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.h">
+      <Filter>Source Files\InGame\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.h">
+      <Filter>Source Files\InGame\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\InGameView.h">
+      <Filter>Source Files\InGame\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\InGameViewComponent.h">
+      <Filter>Source Files\InGame\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\FieldHeightQuadTree.h">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\Terrain.h">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainCommon.h">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainTree.h">
+      <Filter>Source Files\InGame\Model\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectId.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\GameObjectInGameView.h">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\Terrain\TerrainInGameView.h">
+      <Filter>Source Files\InGame\View\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorView.h">
+      <Filter>Source Files\LevelEditor\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainLevelEditorView.h">
+      <Filter>Source Files\LevelEditor\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\HealthPointBarView.h">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\ControllerGameState.h">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\PathView.h">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectRoute.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\DataStructures\FastReusableResourceMap.h">
+      <Filter>Source Files\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\TickContext.h">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommand.h">
+      <Filter>Source Files\InGame\Controller\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommands.h">
+      <Filter>Source Files\InGame\Controller\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\InGameController.h">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\CommandListProcessor.h">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\CommandList.h">
+      <Filter>Source Files\InGame\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\CommandSource.h">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\InGameModel.h">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Level.h">
+      <Filter>Source Files\InGame\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GameObjectTerrainTreeNodeMapping.h">
+      <Filter>Source Files\InGame\Model\GameObjects\ObjectToNodeMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GroundObjectTerrainTreeNodeMapping.h">
+      <Filter>Source Files\InGame\Model\GameObjects\ObjectToNodeMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\ObjectToNodeMapping.h">
+      <Filter>Source Files\InGame\Model\GameObjects\ObjectToNodeMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\AStar.h">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinder.h">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinding.h">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\SimpleHierarchicalPathFinder.h">
+      <Filter>Source Files\InGame\Model\GameObjects\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObject.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectConstants.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightSubsystem.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectModel.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectMovementSubsystem.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectPose.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectSubsystem.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectWorkSubsystem.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\BottomControl.h">
+      <Filter>Source Files\InGame\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.h">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectTypeIndex.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\PlayerData.h">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\PlayerColors.h">
+      <Filter>Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectMovementPrototype.h">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectPrototype.h">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestCar.h">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestInfantryUnit.h">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectFightPrototype.h">
+      <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightData.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.h">
+      <Filter>Source Files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\AttackLineView.h">
+      <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Math\Math.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\LevelEditor\BlockTool.hlsl">
+      <Filter>Resource Files\Shaders\DX11\LevelEditor</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\GameObjects\GameObject.hlsl">
+      <Filter>Resource Files\Shaders\DX11\GameObjects</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\HudRectangle.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\Line.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\SimpleLine.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainCommon.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainField.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainWall.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TextRender.hlsl" />
+    <None Include="..\..\Resources\Shaders\DX11\BackgroundCubemap.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\Lighting.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\RenderPass.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\HLSL\Structures.hlsl">
+      <Filter>Resource Files\Shaders\HLSL</Filter>
+    </None>
+  </ItemGroup>
+</Project>

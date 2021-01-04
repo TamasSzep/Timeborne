@@ -1,0 +1,9 @@
+bool IsInside(float4 p)
+{
+	return (p.x >= -p.w && p.x < p.w && p.y >= -p.w && p.y < p.w && p.z >= 0 && p.z <= p.w);
+}
+
+float3 ClampSS(float4 pp)
+{
+	return clamp(pp.xyz / pp.w, float3(-1.0f, -1.0f, 0.0f), float3(1.0f, 1.0f, 1.0f));
+}

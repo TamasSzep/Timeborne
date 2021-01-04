@@ -1,0 +1,6 @@
+		// DEBUG!!!
+		//cursorPosition = { -0.232813, -0.204167 };
+			//printf("cursorPosition = { %f, %f };\n", cursorPosition.x, cursorPosition.y);
+
+
+// Bug in intersection on walls: round is random.

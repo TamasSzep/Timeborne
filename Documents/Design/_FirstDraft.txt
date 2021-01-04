@@ -1,0 +1,106 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// TIMEBORNE /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+This document is the first design draft of our game 'Timeborne'.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// Main concept //////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Timeborne is a sci-fi themed real-time strategy game.
+
+Main unique features:
+	- time passes with different speed at different location and is also a resource that can be "captured"
+	- the game is simultaneously played in multiple galaxies, which are connected by galaxis wormholes
+
+The gameplay contains of:
+	- exploiting resources
+	- building structures and units
+	- researching technology
+	- fighting the enemy factions
+
+There are three playable factions:
+	- Machine: artificial intelligence faction (robots)
+	- Wise: human faction
+	- Valiant: human faction
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// Background story /////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+[?] When?
+
+The mankind spread out in the universe, colonised and terraformed countless planets, populated many solar system
+and galaxies. As a result of thousands of years of research physics of the known universe became well understood, and
+engineers succeed to master material and capture time ([+] add physical background), which allowed for artifically changing
+how fast time passes in a given point of the space-time continuum. This made the creation and maintaining of wormholes practical
+and travelling between far colonies in seconds possible.
+All these improvements wouldn't have been possible without the advanced artificial intelligence, which at some point become more
+potential than the human mind in many aspects including comprehension and imagination. As machines understood better the universe
+they slowly started to evolve a feeling - a feeling of responsibility for the existence of the universe,
+which - in their interpretation - is dangered by the human's researches of weapon system that utilizes captured time.
+They first started to refuse to obey human commands later they turned against human supiriority,
+drove out the human military command and turned the rest of population to slaves in many galaxies.
+Mankind reacted slowly and powerless to the Machine uprising, the intergalactical council has broken to two factions:
+the Wise and the Valiant. The Wise faction is the alliance of galaxies with far-developed modern technology,
+genetically mutated brilliant humans and deffensive way of thinking about the Machine defection.
+The core of the Valiant faction is the alliance of galaxies where the genetical mutation mainly used the augment the physical
+capabilities of humans, such as strength and reaction time.
+A titanic war shatters the known universe, the one that ultimately decides our fate and the future of the universe.
+
+[+] Add a religious aspect for all factions based on the comprehension and relation to time.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// Time concept /////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Time passes with different speed at different locations in the game.
+This is described by a time speed function that alters by level setup and can be modified by the player.
+[?] Can wormholes be used to modify the time speed by equalizing it both sides and thus trasferring time speed from
+one location to another?
+
+Time is also an exploitable resource that can be captured from time sources ([+] add physical background).
+[?] Finite or infinite?
+Captured time can be spent on:
+	- creating and maintaining wormholes
+	- altering the time speed at a given location ([?] physics: the integrated speed over time = captured time)
+	- [?] facilitate research
+	
+[?] How is the time speed function visualized? Does this relate to the terrain height or is coloured in "time view" mode?
+(The latter should be better...)
+
+The main idea behind the different time speeds is that regions, where time currently/in average (-> time view) passes faster,
+are more desireable, and therefore it creates an additional important aspect of the strategy.
+
+The time speed is in connection with some physical phenomenons and alters with location and game time (= main linear time).
+[?] Physical explanation: movement of black holes?
+
+[?] There could be structures and/or units which act as kind of a "master of time" ([?] connect it to the religius aspect)
+that ensure a more effective usage of captured time.
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////// Other resources ///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Besides time a traditional resource is used: antimaterial (AM).
+It can be spent on:
+	- creating/repairing structures, creating units
+	- researching technology
+	
+[?] We omit the usage of supplies ("houses"). It's just a tedious task to build them and doesn't contribute
+that much to the gameplay.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////// Galaxies and wormholes /////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+A level consists of multiple galaxies, called layers, which can be connected by wormholes,
+however the creation and maintaining of wormholes requires captured time resource.
+
+The presence of multiple layers requires the ability to automate a lot. Automated mechanisms such as attack and defense
+should work generally quite good, even against an experienced player.
+
+Different types of wormholes require different amount of captured time and work with different speed, respectively.

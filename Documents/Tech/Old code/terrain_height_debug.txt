@@ -1,0 +1,55 @@
+DirectX11Render::Texture2D m_HeightTexture, m_HeightCopyTexture, m_Deb;
+
+inline Core::SimpleTypeVectorU<float> deb_read_data(ID3D11DeviceContext* context, Texture2D& texture,
+	unsigned mipmapLevel, unsigned xSize, unsigned ySize)
+{
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	auto hr = context->Map(texture.GetResource(), mipmapLevel, D3D11_MAP_READ, 0, &mappedResource);
+	if (FAILED(hr))
+	{
+		EngineBuildingBlocks::RaiseException("Failed to map a texture 2D for reading.");
+	}
+	Core::SimpleTypeVectorU<float> values;
+	values.PushBack(-1.0f, mappedResource.DepthPitch / 4);
+	memcpy(values.GetArray(), mappedResource.pData, mappedResource.DepthPitch);
+	context->Unmap(texture.GetResource(), mipmapLevel);
+
+	Core::SimpleTypeVectorU<float> ret;
+	for (unsigned y = 0; y < ySize; y++)
+	{
+		for (unsigned x = 0; x < xSize; x++)
+		{
+			ret.PushBack(values[y * mappedResource.RowPitch / 4 + x]);
+		}
+	}
+	return ret;
+}
+
+	// Debug.
+	m_Size = glm::uvec2(1024);
+	m_Heights.Clear();
+	m_Heights.PushBack(0.0f, m_Size.x * m_Size.y);
+	m_Heights[0] = m_Size.x * m_Size.y * 37.0f;
+
+
+	m_Deb.Initialize(context.Device,
+		Texture2DDescription(m_Size.x, m_Size.y, DXGI_FORMAT_R32_FLOAT, 1, 1, D3D11_USAGE_STAGING,
+			TextureBindFlag::None, TextureMiscFlag::None, TextureExtraFlag::HasMipmaps));
+
+	for (unsigned i = 0; i < countMipmaps; i++)
+	{
+		context.DeviceContext->CopySubresourceRegion(
+			m_Deb.GetResource(), i, 0, 0, 0, m_HeightTexture.GetResource(), i, NULL);
+	}
+
+	std::vector<Core::SimpleTypeVectorU<float>> datas;
+	auto w = desc.Width;
+	auto h = desc.Height;
+	for (unsigned i = 0; i < countMipmaps; i++)
+	{
+		datas.push_back(deb_read_data(context.DeviceContext, m_Deb, i, w, h));
+		w = std::max(w >> 1, 1U);
+		h = std::max(h >> 1, 1U);
+	}
+
+	auto deb = 0;

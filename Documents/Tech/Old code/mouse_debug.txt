@@ -1,0 +1,190 @@
+// Timeborne/Menu/Menu.cpp
+
+static unsigned m_ActionECI = 0;
+
+void Menu::DerivedInitializeMain(const ComponentInitContext& context)
+{
+	auto keyHandler = context.Application->GetKeyHandler();
+
+	m_EscapeECI = keyHandler->RegisterStateKeyEventListener("LevelEditor_Escape", m_Application);
+	keyHandler->BindEventToKey(m_EscapeECI, Keys::Escape);
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+	auto mouseHandler = context.Application->GetMouseHandler();
+
+	// Registering a mouse event.
+	m_ActionECI = mouseHandler->RegisterMouseButtonEventListener("Menu.RightClick", context.Application,
+		true, true);
+
+	// Binding the mouse event.
+	mouseHandler->BindEventToButton(m_ActionECI, MouseButton::Right);
+}
+
+enum class ButtonEvent { Down, Up, Update };
+
+void UpdateButton(ButtonEvent _event)
+{
+	static auto startTime = std::chrono::steady_clock::now();
+	static auto lastTime = startTime;
+	static auto lastDownTime = startTime;
+	static auto lastUpTime = startTime;
+	static bool steadyDown = false;
+	static bool latestDown = false;
+	static bool initialized = false;
+	static std::chrono::steady_clock::time_point timerStart{};
+	static std::chrono::steady_clock::time_point lastStateChange{};
+	static int downCtr = 0;
+
+	bool isDown = (_event == ButtonEvent::Down);
+	bool isUp = (_event == ButtonEvent::Up);
+	bool isUpdate = (_event == ButtonEvent::Update);
+
+	auto getDiffMs = [](std::chrono::steady_clock::time_point t1,
+		std::chrono::steady_clock::time_point t2) {
+			return (int)std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+	};
+
+	auto currTime = std::chrono::steady_clock::now();
+	auto lastDiff = getDiffMs(lastTime, currTime);
+	auto stateDiff = isUpdate ? -1 : getDiffMs(isDown ? lastDownTime : lastUpTime, currTime);
+
+	auto newSteadyDown = steadyDown;
+
+	if (isDown)
+	{
+		newSteadyDown = true;
+		timerStart = decltype(timerStart)();
+	}
+	else if (isUp)
+	{
+		timerStart = currTime;
+	}
+	else // Update
+	{
+		if (timerStart != decltype(timerStart)() && getDiffMs(timerStart, currTime) >= 100)
+		{
+			newSteadyDown = false;
+		}
+	}
+
+	if (!isUpdate)
+	{
+		printf("%s %5d / %5d ms\n", isDown ? "KEY_DOWN:" : "KEY_UP:  ", lastDiff, stateDiff);
+	}
+	if (newSteadyDown != steadyDown)
+	{
+		if (newSteadyDown) downCtr++;
+		printf("(%3d)-----------------------> %s\n", downCtr, newSteadyDown ? "DOWN" : "UP");
+	}
+
+	steadyDown = newSteadyDown;
+	if (!isUpdate)
+	{
+		lastTime = currTime;
+		latestDown = isDown;
+		(isDown ? lastDownTime : lastUpTime) = currTime;
+	}
+	initialized = true;
+}
+
+bool Menu::HandleEvent(const EngineBuildingBlocks::Event* _event)
+{
+	auto eci = _event->ClassId;
+	if (eci == m_EscapeECI)
+	{
+		m_Application->RequestExiting();
+		return true;
+	}
+	else if(eci == m_ActionECI)
+	{
+		UpdateButton(((MouseButtonEvent*)_event)->Pressed ? ButtonEvent::Down : ButtonEvent::Up);
+	}
+	return false;
+}
+
+void Menu::PreUpdate(const ComponentPreUpdateContext& context)
+{
+	UpdateButton(ButtonEvent::Update);
+}
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+enum class ButtonEvent { Down, Up, Update };
+enum class InternalState {SteadyReleased, Pressed, UnsureReleased};
+
+InternalState s_InternalState = InternalState::SteadyReleased;
+std::chrono::steady_clock::time_point s_CurrentStateStart{};
+int s_LastStateDuration = -1;
+
+int GetDiffMs(std::chrono::steady_clock::time_point t1,std::chrono::steady_clock::time_point t2)
+{
+	return (int)std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
+}
+
+void UpdateButton(ButtonEvent _event)
+{
+	bool isDown = (_event == ButtonEvent::Down);
+	bool isUp = (_event == ButtonEvent::Up);
+	bool isUpdate = (_event == ButtonEvent::Update);
+
+	auto currTime = std::chrono::steady_clock::now();
+
+	if (!isUpdate)
+	{
+		static std::chrono::steady_clock::time_point lastTime = currTime;
+		auto lastDiff = GetDiffMs(lastTime, currTime);
+		printf("%s %5d ms\n", isDown ? "KEY_DOWN:" : "KEY_UP:  ", lastDiff);
+		lastTime = currTime;
+	}
+
+	auto enterState = [currTime](InternalState state) {
+		s_InternalState = state;
+		s_LastStateDuration = (s_CurrentStateStart == decltype(s_CurrentStateStart)())
+			? 0
+			: GetDiffMs(s_CurrentStateStart, currTime);
+		s_CurrentStateStart = currTime;
+	};
+
+	auto emitEvent = [](bool isPressedEvent) {
+		static int downCtr = 0;
+		if (isPressedEvent) downCtr++;
+		printf("(%3d)-----------------------> %s\n", downCtr, isPressedEvent ? "DOWN" : "UP");
+	};
+
+	switch (s_InternalState)
+	{
+		case InternalState::SteadyReleased:
+		{
+			if (isDown)
+			{
+				enterState(InternalState::Pressed);
+				emitEvent(true);
+			}
+			break;
+		}
+		case InternalState::Pressed:
+		{
+			if (isUp) enterState(InternalState::UnsureReleased);
+			break;
+		}
+		case InternalState::UnsureReleased:
+		{
+			if (isDown)
+			{
+				enterState(InternalState::Pressed);
+			}
+			else if(isUpdate)
+			{
+				if (GetDiffMs(s_CurrentStateStart, currTime) >= 100)
+				{
+					enterState(InternalState::SteadyReleased);
+					emitEvent(false);
+				}
+			}
+			break;
+		}
+	}
+}

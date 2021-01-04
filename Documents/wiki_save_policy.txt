@@ -1,0 +1,2 @@
+Our Wiki site about the project: http://192.168.2.119/index.php/Timeborne should be saved occasionally.
+Single Wiki pages can be saved by appending '?action=render' to the URL.

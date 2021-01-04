@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Configuration>
+
+  <Property name="Title" value="Timeborne" />
+  
+  <!-- Previous resolution values used with the 4k monitor:
+    - WindowedWidth: 2880
+    - WindowedHeight: 1620
+    - ContentWidth: 1920
+    - ContentHeight: 1080
+	
+	Converted for the 1920x1200 monitor by dividing all values with 1.5.
+  -->
+  
+  <Property name="WindowedWidth" value="1920" />
+  <Property name="WindowedHeight" value="1080" />
+  <Property name="ContentWidth" value="1280" />
+  <Property name="ContentHeight" value="720" />
+  <Property name="IsWindowed" value="1" />
+  <Property name="MultisampleCount" value="8" />
+  
+  <Property name="BackbufferFrameCount" value="1" />
+  
+  <Property name="FontSize" value="13" />
+  
+  <InGame>
+	<Property name="TerrainTessellationBase" value="16" />
+  </InGame>
+  
+  <Input>
+	<Mouse>
+		<Property name="AntiPrellFilterTimeout" value="100" />
+	</Mouse>
+  </Input>
+
+</Configuration>

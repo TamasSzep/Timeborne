@@ -1,0 +1,144 @@
+	inline unsigned CreateTerrainFieldLinePS(const ComponentRenderInitContext& context, bool isXLine)
+{
+	std::vector<ShaderDefine> defines = { { "IS_X_LINE", (isXLine ? "1" : "0") } };
+	auto vs = context.DX11M->ShaderManager.GetShaderSimple(context.Device, { "TerrainFieldLines.hlsl", "VSMain", ShaderType::Vertex, defines });
+	auto hs = context.DX11M->ShaderManager.GetShaderSimple(context.Device, { "TerrainFieldLines.hlsl", "HSMain", ShaderType::Hull, defines });
+	auto ds = context.DX11M->ShaderManager.GetShaderSimple(context.Device, { "TerrainFieldLines.hlsl", "DSMain", ShaderType::Domain, defines });
+	auto ps = context.DX11M->ShaderManager.GetShaderSimple(context.Device, { "TerrainFieldLines.hlsl", "PSMain", ShaderType::Pixel, defines });
+
+	PipelineStateDescription description;
+	description.Shaders = { vs, hs, ds, ps };
+	description.InputLayout = DirectX11Render::VertexInputLayout::Create(EngineBuildingBlocks::Graphics::VertexInputLayout::GetDummy());
+	description.SamplerStates = { { SamplerStateDescription(), DirectXRender::ShaderFlagType::Hull } };
+	description.RasterizerState.EnableMultisampling();
+
+	return context.DX11M->PipelineStateManager.GetPipelineStateIndex(context.Device, description);
+}
+	
+	if (showGrid)
+	{
+		// We use the same dummy vertex buffer, coefficient textures and constant buffers.
+		// We render the upper and left edges of the fields: no need for a frame.
+
+		context.DX11M->PipelineStateManager.GetPipelineState(m_TerrainFieldLinePSX).SetForContext(context.DeviceContext);
+		context.DeviceContext->Draw(countInstances, 0);
+
+		context.DX11M->PipelineStateManager.GetPipelineState(m_TerrainFieldLinePSZ).SetForContext(context.DeviceContext);
+		context.DeviceContext->Draw(countInstances, 0);
+	}
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	// TerrainFieldLines.hlsl
+
+#include "../HLSL/Structures.hlsl"
+#include "RenderPass.hlsl"
+#include "TerrainCommon.hlsl"
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct VS_DummyInput
+{
+	float Dummy : TEXCOORD0;
+};
+
+struct VS_Output
+{
+	float Dummy : TEXCOORD0;
+};
+
+VS_Output VSMain()
+{
+	return (VS_Output)0;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct ConstantFunc_Output
+{
+	float Edges[2]			: SV_TessFactor;
+	uint2 FieldIndex		: TEXCOORD0;
+	float4x4 CoeffMatrix	: TEXCOORD1;
+};
+
+ConstantFunc_Output PatchConstantFunc(uint patchId : SV_PrimitiveID)
+{
+	ConstantFunc_Output output;
+
+	uint2 fieldIndex = GetFieldIndex(patchId);
+	float4x4 coeffMatrix = GetCoeffMatrix(fieldIndex);
+
+	float3 p0 = GetWorldPos(float2(0.0f, 0.0f), fieldIndex, coeffMatrix);
+	float diff0 = length(CameraPosition - p0);
+	float tessFactor;
+#if IS_X_LINE
+	float3 p1 = GetWorldPos(float2(1.0f, 0.0f), fieldIndex, coeffMatrix);
+	float diff1 = length(CameraPosition - p1);
+	tessFactor = GetEdgeTessFactor(min(diff0, diff1));
+#else
+	float3 p3 = GetWorldPos(float2(0.0f, 1.0f), fieldIndex, coeffMatrix);
+	float diff3 = length(CameraPosition - p3);
+	tessFactor = GetEdgeTessFactor(min(diff3, diff0));
+#endif
+
+	output.Edges[0] = 1.0f;			// Detail factor (instance count).
+	output.Edges[1] = tessFactor;	// Density factor (tessellation count).
+
+	output.FieldIndex = fieldIndex;
+	output.CoeffMatrix = coeffMatrix;
+
+	return output;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct HS_Output
+{
+};
+
+[domain("isoline")]
+[partitioning("fractional_even")]
+[outputtopology("line")]
+[outputcontrolpoints(2)]
+[patchconstantfunc("PatchConstantFunc")]
+HS_Output HSMain()
+{
+	return (HS_Output)0;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct DS_Output
+{
+	float4 Position	: SV_POSITION;
+};
+
+[domain("isoline")]
+DS_Output DSMain(ConstantFunc_Output input, float2 uv : SV_DomainLocation, const OutputPatch<HS_Output, 2> dummyPatch)
+{
+	DS_Output output;
+
+#if IS_X_LINE
+	float2 texCoord = float2(uv.x, 0.0f);
+#else
+	float2 texCoord = float2(0.0f, uv.x);
+#endif
+
+	float3 worldPos = GetWorldPos(texCoord, input.FieldIndex, input.CoeffMatrix);
+
+	output.Position = mul(ViewProjectionMatrix, float4(worldPos, 1.0f));
+
+	// Depth bias.
+	output.Position.z -= output.Position.w * 3e-6f;
+
+	return output;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+float4 PSMain(DS_Output input) : SV_TARGET
+{
+	return float4(0.2f, 0.2f, 0.2f, 1.0f);
+}

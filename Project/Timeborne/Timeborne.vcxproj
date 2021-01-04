@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Timeborne\ApplicationComponent.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\CommandLine.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Console.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\GameCreationData.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\PlayerData.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GUI\NuklearGUI.c" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\CommandList.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\ControllerGameState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommand.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommands.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\InGameController.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\InGame.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\CommandListProcessor.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObject.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightData.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightSubsystem.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectId.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectModel.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectMovementSubsystem.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectPose.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectRoute.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectSubsystem.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectWorkSubsystem.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GameObjectTerrainTreeNodeMapping.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GroundObjectTerrainTreeNodeMapping.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\AStar.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinder.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinding.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\SimpleHierarchicalPathFinder.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectMovementPrototype.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectPrototype.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestCar.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestInfantryUnit.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\InGameModel.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Level.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\FieldHeightQuadTree.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\Terrain.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainTree.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\BottomControl.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\AttackLineView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\GameObjectInGameView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\HealthPointBarView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\PathView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\InGameView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\View\Terrain\TerrainInGameView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InputHandling.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorModel.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\ManageGameObjectsTool.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\GameObjects\NewGameObjectsTool.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\LevelEditorComponent.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\LevelEditor.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainEditing.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainLevelEditorView.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainSpadeTool.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Logger.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\main.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\MainApplication.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\MainMenu\MainMenu.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Misc\ScreenResolution.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Misc\UserConfiguration.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Settings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Timeborne\ApplicationComponent.h" />
+    <ClInclude Include="..\..\Source\Timeborne\CommandLine.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Console.h" />
+    <ClInclude Include="..\..\Source\Timeborne\DataStructures\FastReusableResourceMap.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\CoreDeclarations.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\DirectX11RenderDeclarations.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Declarations\EngineBuildingBlocksDeclarations.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\GameCreationData.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\PlayerData.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\GUIConstants.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearD3D11Include.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearGUI.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearHelper.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearInclude.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GUI\TimeborneGUI.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\CommandList.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\ControllerGameState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommand.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommands.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Controller\InGameController.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\InGame.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\CommandListProcessor.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\CommandSource.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObject.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectConstants.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightData.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectFightSubsystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectId.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectModel.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectMovementSubsystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectPose.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectRoute.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectSubsystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectTypeIndex.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectWorkSubsystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GameObjectTerrainTreeNodeMapping.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GroundObjectTerrainTreeNodeMapping.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\ObjectToNodeMapping.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\AStar.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinder.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\PathFinding.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\PathFinding\SimpleHierarchicalPathFinder.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectFightPrototype.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectMovementPrototype.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectPrototype.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestCar.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\Units\TestInfantryUnit.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\InGameModel.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Level.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\FieldHeightQuadTree.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\Terrain.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainCommon.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\Terrain\TerrainTree.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\TickContext.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\BottomControl.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\AttackLineView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\GameObjectInGameView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\HealthPointBarView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\GameObjects\PathView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\InGameView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\InGameViewComponent.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\View\Terrain\TerrainInGameView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InputHandling.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorModel.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\GameObjectLevelEditorView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\ManageGameObjectsTool.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\GameObjects\NewGameObjectsTool.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\LevelEditor.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\LevelEditorComponent.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainEditing.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainFieldBlockHeightIterator.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainLevelEditorView.h" />
+    <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainSpadeTool.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Logger.h" />
+    <ClInclude Include="..\..\Source\Timeborne\MainApplication.h" />
+    <ClInclude Include="..\..\Source\Timeborne\MainMenu\MainMenu.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Math\Math.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Math\SqrtExtendedIntegerRing.hpp" />
+    <ClInclude Include="..\..\Source\Timeborne\Misc\ScreenResolution.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Misc\UserConfiguration.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\PlayerColors.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Settings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\LevelEditor\BlockTool.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainCommon.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainField.hlsl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TerrainWall.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\HudRectangle.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\GameObjects\GameObject.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\SimpleLine.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\Line.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\HLSL\Structures.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\RenderPass.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\Lighting.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\BackgroundCubemap.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Resources\Shaders\DX11\TextRender.hlsl">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Internal\Framework\Project\VS2019\Common\Core\Core.vcxproj">
+      <Project>{782f4045-19e4-4349-b37f-c96a46b1a01a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Internal\Framework\Project\VS2019\Framework2\DirectX11Render\DirectX11Render.vcxproj">
+      <Project>{dbc80a36-d93e-4132-896e-6e0f446b9c10}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Internal\Framework\Project\VS2019\Framework2\EngineBuildingBlocks\EngineBuildingBlocks.vcxproj">
+      <Project>{349afaca-299a-47d8-a04a-dd8f25fcb963}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Internal\Framework\Project\VS2019\Framework2\WindowsApplication\WindowsApplication.vcxproj">
+      <Project>{c7fcadb5-23f9-41bc-9676-1bf8569136dd}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{CD4513D9-1778-4DF1-9DF9-275CEABB5F88}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Timeborne</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)/../../Build/VS2017/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)/../../Temp/VS2017/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)\..\..\Build\VS2019\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\..\..\Temp\VS2019\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)/../../Build/VS2017/$(Platform)/$(Configuration)/</OutDir>
+    <IntDir>$(ProjectDir)/../../Temp/VS2017/$(Platform)/$(Configuration)/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)\..\..\Build\VS2019\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\..\..\Temp\VS2019\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../External/Framework/Source/Common;$(ProjectDir)/../../External/Framework/Source/Framework2;$(ProjectDir)/../../External/nuklear/trunk;$(ProjectDir)/../../External/nuklear/trunk/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>dxguid.lib;d2d1.lib;dwrite.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>dxguid.lib;d2d1.lib;dwrite.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(ProjectDir)\..\..\Internal\Framework\External\FreeImage-3.15.4\win64\FreeImage.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../External/Framework/Source/Common;$(ProjectDir)/../../External/Framework/Source/Framework2;$(ProjectDir)/../../External/nuklear/trunk;$(ProjectDir)/../../External/nuklear/trunk/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>dxguid.lib;d2d1.lib;dwrite.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>dxguid.lib;d2d1.lib;dwrite.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y /d "$(ProjectDir)\..\..\Internal\Framework\External\FreeImage-3.15.4\win64\FreeImage.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
