@@ -14,6 +14,7 @@ struct ComponentRenderContext;
 struct GameObjectCommand;
 struct GameObjectData;
 class GameObjectPose;
+struct HeightDependentDistanceParameters;
 class Level;
 class PathFinder;
 
@@ -37,7 +38,10 @@ public:
 	GameObjectMovementSubsystem(const Level& level, GameObjectData& gameObjectData);
 	~GameObjectMovementSubsystem() override;
 
-	bool CreateRoute(GameObjectId objectId, const glm::ivec2& targetField, float maxDistance,
+	float GetPathFindingHeight(const GameObjectPose& pose) const;
+
+	bool CreateRoute(GameObjectId objectId, const glm::ivec2& targetField,
+		const HeightDependentDistanceParameters* distanceParameters,
 		const glm::dvec2& orientationTarget);
 	void DeleteRoute(GameObjectId objectId);
 	void ProcessCommand(const GameObjectCommand& command);

@@ -9,3 +9,8 @@ GameObjectSubsystem::GameObjectSubsystem()
 GameObjectSubsystem::~GameObjectSubsystem()
 {
 }
+
+void GameObjectSubsystem::SetLoading(bool loading)
+{
+	m_Loading = loading;
+}

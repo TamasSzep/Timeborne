@@ -27,6 +27,11 @@ GameObjectModel::GameObjectModel(const Level& level, const GameCreationData& gam
 		*m_MovementSubsystem);
 	m_WorkSubsystem = std::make_unique<GameObjectWorkSubsystem>(level);
 
+	// Defines the tick order.
+	m_Subsystems.push_back(m_MovementSubsystem.get());
+	m_Subsystems.push_back(m_FightSubsystem.get());
+	m_Subsystems.push_back(m_WorkSubsystem.get());
+
 	if (fromSaveFile)
 	{
 		LoadState();
@@ -84,9 +89,10 @@ void GameObjectModel::Tick(const TickContext& context)
 {
 	ProcessCommands();
 
-	m_MovementSubsystem->Tick(context);
-	m_FightSubsystem->Tick(context);
-	m_WorkSubsystem->Tick(context);
+	for (auto subsystem : m_Subsystems)
+	{
+		subsystem->Tick(context);
+	}
 }
 
 void GameObjectModel::AddGameObject(const GameObjectLevelData& goData)
@@ -129,17 +135,26 @@ void GameObjectModel::LoadState()
 {
 	assert(m_GameObjectData.ClientModelGameState != nullptr);
 
-	// Adding the game objects.
+	// Setting the next game object id.
 	uint32_t maxId = 0;
-	auto& gameObjects = m_GameObjectData.ClientModelGameState->GetGameObjects().Get();
-	for (auto& gameObjectData : gameObjects)
+	const auto& gameObjects = m_GameObjectData.ClientModelGameState->GetGameObjects().Get();
+	for (const auto& gameObjectData : gameObjects)
 	{
 		maxId = std::max(maxId, (uint32_t)gameObjectData.first);
 	}
 	m_GameObjectData.NextGameObjectId = gameObjects.empty() ? 0 : maxId + 1U;
 
-	// No need to add routes explicitly.
+	auto setLoading = [this](bool loading) {
+		for (auto subsystem : m_Subsystems)
+		{
+			subsystem->SetLoading(loading);
+		}
+	};
+
+	setLoading(true);
 
 	// Notifying the listeners.
 	m_GameObjectData.ClientModelGameState->NotifyListenersWithFullState();
+
+	setLoading(false);
 }

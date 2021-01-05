@@ -21,10 +21,10 @@ TestInfantryUnit::TestInfantryUnit()
 	m_Fight.GroundAttack.ReattackDurationMs = 1000;
 	m_Fight.GroundAttack.HitPoints = 50;
 	m_Fight.GroundAttack.EnRouteAttacker = false;
-	m_Fight.GroundAttack.Approach.MaxDistance = 8.0f;
-	m_Fight.GroundAttack.Approach.HeightDistanceFactor = 0.25f;
-	m_Fight.GroundAttack.Approach.HeightDistanceMin = 0.75f;
-	m_Fight.GroundAttack.Approach.HeightDistanceMax = 1.25f;
+	m_Fight.GroundAttack.ApproachDistance.BaseDistance = 8.0f;
+	m_Fight.GroundAttack.ApproachDistance.HeightDistanceFactor = 0.25f;
+	m_Fight.GroundAttack.ApproachDistance.HeightDistanceMin = -2.0f;
+	m_Fight.GroundAttack.ApproachDistance.HeightDistanceMax = 2.0f;
 	m_Fight.AirAttack = m_Fight.GroundAttack;
 
 	m_RenderSize = glm::vec3(1.25f, 0.8f, 1.0f);

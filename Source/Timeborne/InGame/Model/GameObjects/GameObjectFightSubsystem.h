@@ -35,9 +35,6 @@ class GameObjectFightSubsystem : public GameObjectSubsystem
 
 	bool m_ReactOnRouteEvents = true;
 
-	float GetMaxDistance(const GameObject& sourceObject,
-		const AttackPrototypeData& sourceAttackPData,
-		const GameObjectPose& targetPose);
 	bool IsCloseEnoughForAttack(const GameObject& sourceObject,
 		const AttackPrototypeData& sourceAttackPData,
 		const GameObjectPose& targetPose);

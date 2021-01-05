@@ -27,7 +27,6 @@ struct GameObjectPath
 	glm::ivec2 SourceField;
 	glm::ivec2 TargetField;
 	Core::SimpleTypeVectorU<GameObjectPathFieldData> Fields;
-	float MaxDistance;
 
 	void SerializeSB(Core::ByteVector& bytes) const;
 	void DeserializeSB(const unsigned char*& bytes);

@@ -7,6 +7,7 @@
 #include <Timeborne/InGame/Model/GameObjects/PathFinding/SimpleHierarchicalPathFinder.h>
 
 struct GameObjectData;
+class GameObjectPose;
 class Level;
 
 class PathFinder
@@ -25,11 +26,18 @@ class PathFinder
 		SimpleHierarchicalPathFinder
 	} m_Algorithm = Algorithm::AStarOnly;
 
-	void SolveWithAStar(const PathFindingContext& context, GameObjectPath& result);
+	void SolveWithAStar(const PathFindingContext& context, 
+		const HeightDependentDistanceParameters* distanceParameters, 
+		GameObjectPath& result);
+
+	float GetPathFindingHeight(const glm::ivec2& fieldIndex) const;
 
 public:
 
 	PathFinder(const Level& level, const GameObjectData& gameObjectData);
-	void FindPath(GameObjectId objectId, const glm::ivec2& targetField,
-		float maxDistance, GameObjectPath& result);
+	bool FindPath(GameObjectId objectId, const glm::ivec2& targetField,
+		const HeightDependentDistanceParameters* distanceParameters,
+		GameObjectPath& result);
+
+	float GetPathFindingHeight(const GameObjectPose& pose) const;
 };

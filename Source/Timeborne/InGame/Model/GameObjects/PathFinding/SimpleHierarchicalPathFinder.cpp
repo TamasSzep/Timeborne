@@ -7,7 +7,8 @@
 
 constexpr unsigned c_StartNodeSize = 16;
 
-void SimpleHierarchicalPathFinder::FindPath(PathFindingContext& context, GameObjectPath& result)
+void SimpleHierarchicalPathFinder::FindPath(PathFindingContext& context,
+	const HeightDependentDistanceParameters* distanceParameters, GameObjectPath& result)
 {
 	auto& level = context.Level;
 	auto& terrain = level.GetTerrain();

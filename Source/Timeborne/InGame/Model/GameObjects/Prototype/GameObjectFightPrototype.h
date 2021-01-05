@@ -2,19 +2,13 @@
 
 #pragma once
 
+#include <Timeborne/InGame/Model/GameObjects/HeightDependentDistanceParameters.h>
+
 #include <cstdint>
 
 enum class AttackType
 {
 	None, Immediate, Projectile
-};
-
-struct AttackApproachPrototypeData
-{
-	float MaxDistance = 0.0f;
-	float HeightDistanceFactor = 0.0f;
-	float HeightDistanceMin = 1.0f;
-	float HeightDistanceMax = 1.0f;
 };
 
 struct AttackPrototypeData
@@ -24,7 +18,7 @@ struct AttackPrototypeData
 	uint32_t ReattackDurationMs = 0;
 	uint32_t HitPoints = 0;
 	bool EnRouteAttacker = false;
-	AttackApproachPrototypeData Approach = {};
+	HeightDependentDistanceParameters ApproachDistance = {};
 };
 
 struct GameObjectFightPrototype

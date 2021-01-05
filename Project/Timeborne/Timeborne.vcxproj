@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectSubsystem.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectTypeIndex.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectWorkSubsystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\HeightDependentDistanceParameters.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GameObjectTerrainTreeNodeMapping.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\GroundObjectTerrainTreeNodeMapping.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\ObjectToNodeMapping\ObjectToNodeMapping.h" />

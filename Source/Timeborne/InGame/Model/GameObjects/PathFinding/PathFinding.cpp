@@ -26,7 +26,6 @@ void GameObjectPath::SerializeSB(Core::ByteVector& bytes) const
 	Core::SerializeSB(bytes, Core::ToPlaceHolder(SourceField));
 	Core::SerializeSB(bytes, Core::ToPlaceHolder(TargetField));
 	Core::SerializeSB(bytes, Fields);
-	Core::SerializeSB(bytes, MaxDistance);
 }
 
 void GameObjectPath::DeserializeSB(const unsigned char*& bytes)
@@ -35,7 +34,6 @@ void GameObjectPath::DeserializeSB(const unsigned char*& bytes)
 	Core::DeserializeSB(bytes, Core::ToPlaceHolder(SourceField));
 	Core::DeserializeSB(bytes, Core::ToPlaceHolder(TargetField));
 	Core::DeserializeSB(bytes, Fields);
-	Core::DeserializeSB(bytes, MaxDistance);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

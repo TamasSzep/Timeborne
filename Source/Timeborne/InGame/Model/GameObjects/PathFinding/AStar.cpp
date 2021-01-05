@@ -2,6 +2,8 @@
 
 #include <Timeborne/InGame/Model/GameObjects/PathFinding/AStar.h>
 
+#include <Timeborne/InGame/Model/GameObjects/HeightDependentDistanceParameters.h>
+
 #include <Timeborne/InGame/Model/Terrain/TerrainTree.h>
 
 #include <Core/Constants.h>
@@ -24,7 +26,7 @@ void AStar::ReconstructPath(unsigned endLocalIndex, Core::IndexVectorU& nodeIndi
 }
 
 void AStar::FindPath(const PathFindingContext& context, unsigned startNodeIndex, unsigned endNodeIndex,
-	float maxDistance, Core::IndexVectorU& nodeIndices)
+	const HeightDependentDistanceParameters* distanceParameters, Core::IndexVectorU& nodeIndices)
 {
 #if MEASURE_PATH_FINDING_EXECUTION_TIME
 	auto startTime = std::chrono::steady_clock::now();
@@ -47,13 +49,17 @@ void AStar::FindPath(const PathFindingContext& context, unsigned startNodeIndex,
 
 	auto& terrainTree = context.TerrainTree;
 
-	bool isApproachingPath = (maxDistance > 0.0f);
-	float maxDistanceSqr = maxDistance * maxDistance;
-	auto endField = terrainTree.GetNode(endNodeIndex).Start;
-	auto isCloseEnoughToEndField = [&terrainTree, endField, maxDistanceSqr](uint32_t currentNodeIndex) {
-		auto currentField = terrainTree.GetNode(currentNodeIndex).Start;
-		auto offset = endField - currentField;
-		return offset.x * offset.x + offset.y * offset.y <= maxDistanceSqr;
+	bool isApproachingPath = (distanceParameters != nullptr);
+	const auto& endNode = terrainTree.GetNode(endNodeIndex);
+	float endHeightAvg = (endNode.MinHeight + endNode.MaxHeight) * 0.5f;
+	auto endField = endNode.Start;
+	auto isCloseEnoughToEndField = [&terrainTree, endHeightAvg, endField, distanceParameters](
+		uint32_t currentNodeIndex) {
+		const auto& currentNode = terrainTree.GetNode(currentNodeIndex);
+		float currentHeightAvg = (currentNode.MinHeight + currentNode.MaxHeight) * 0.5f;
+		float maxDistance = distanceParameters->GetValue(currentHeightAvg, endHeightAvg);
+		auto offset = endField - currentNode.Start;
+		return offset.x * offset.x + offset.y * offset.y <= maxDistance * maxDistance;
 	};
 
 	assert(HasSingleNodeSize(terrainTree, startNodeIndex, endNodeIndex));

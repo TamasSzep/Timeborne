@@ -3,6 +3,7 @@
 #include <Timeborne/InGame/Model/GameObjects/PathFinding/PathFinder.h>
 
 #include <Timeborne/InGame/Model/GameObjects/GameObject.h>
+#include <Timeborne/InGame/Model/GameObjects/GameObjectPose.h>
 #include <Timeborne/InGame/Model/GameObjects/Prototype/GameObjectPrototype.h>
 #include <Timeborne/InGame/Model/Terrain/TerrainTree.h>
 #include <Timeborne/InGame/GameState/ServerGameState.h>
@@ -16,7 +17,23 @@ PathFinder::PathFinder(const Level& level, const GameObjectData& gameObjectData)
 {
 }
 
-void PathFinder::FindPath(GameObjectId objectId, const glm::ivec2& targetField, float maxDistance, GameObjectPath& result)
+float PathFinder::GetPathFindingHeight(const glm::ivec2& fieldIndex) const
+{	
+	// Must be consistent with the formula in A-star.
+	auto terrainTree = m_Level.GetTerrainTree();
+	assert(terrainTree != nullptr);
+	auto nodeIndex = terrainTree->GetNodeIndexForField(fieldIndex);
+	const auto& node = terrainTree->GetNode(nodeIndex);
+	return (node.MinHeight + node.MaxHeight) * 0.5f;
+}
+
+float PathFinder::GetPathFindingHeight(const GameObjectPose& pose) const
+{
+	return GetPathFindingHeight(pose.GetTerrainFieldIndex());
+}
+
+bool PathFinder::FindPath(GameObjectId objectId, const glm::ivec2& targetField,
+	const HeightDependentDistanceParameters* distanceParameters, GameObjectPath& result)
 {
 	assert(m_Level.GetTerrainTree() != nullptr);
 
@@ -37,12 +54,20 @@ void PathFinder::FindPath(GameObjectId objectId, const glm::ivec2& targetField, 
 	result.SourceField = sourceField;
 	result.TargetField = targetField;
 	result.Fields.Clear();
-	result.MaxDistance = maxDistance;
 
-	if (sourceField == targetField
-		|| (maxDistance > 0.0f && glm::length(glm::vec2(targetField - sourceField)) <= maxDistance)) return;
+	if (sourceField == targetField) return true;
 
-	// Checking whether the source and target nodes are on the same island.
+	auto targetHeight = GetPathFindingHeight(targetField);
+
+	if (distanceParameters != nullptr)
+	{
+		auto sourceHeight = GetPathFindingHeight(sourceField);
+		auto maxDistance = distanceParameters->GetValue(sourceHeight, targetHeight);
+		if (glm::length2(glm::vec2(targetField - sourceField)) <= maxDistance * maxDistance)
+			return true;
+	}
+
+	// Checking whether the source/approaching and target nodes are on the same island.
 	{
 		auto& terrainTree = context.TerrainTree;
 
@@ -50,19 +75,31 @@ void PathFinder::FindPath(GameObjectId objectId, const glm::ivec2& targetField, 
 		auto startIslandIndex = terrainTree.GetIslandIndex(startNodeIndex);
 		assert(startIslandIndex != Core::c_InvalidIndexU);
 
-		// @todo: implement a more efficient pattern.
 		auto countFields = m_Level.GetCountFields();
-		int lDistance = (maxDistance > 0.0f) ? (int)std::floor(maxDistance) : 0;
+		float maxDistance = (distanceParameters != nullptr) ? distanceParameters->GetMax() : 0;
+		int lDistance = (int)std::floor(maxDistance);
 		float maxDistanceSqr = maxDistance * maxDistance;
 
 		bool connected = false;
-		for (int x = -lDistance; x <= lDistance; x++)
+		for (int x = -lDistance; x <= lDistance && !connected; x++)
 		{
 			for (int z = -lDistance; z <= lDistance; z++)
 			{
-				if (x * x + z * z > maxDistanceSqr) continue;
+				auto distanceSqrToTarget = x * x + z * z;
 
-				auto nodeIndex = terrainTree.GetNodeIndexForField(result.TargetField + glm::ivec2(x, z));
+				if (distanceSqrToTarget > maxDistanceSqr) continue;
+
+				auto currentFieldIndex = result.TargetField + glm::ivec2(x, z);
+
+				if (distanceParameters != nullptr)
+				{
+					auto currentHeight = GetPathFindingHeight(currentFieldIndex);
+					auto currentMaxDistance = distanceParameters->GetValue(currentHeight, targetHeight);
+
+					if (distanceSqrToTarget > currentMaxDistance * currentMaxDistance) continue;
+				}
+
+				auto nodeIndex = terrainTree.GetNodeIndexForField(currentFieldIndex);
 				auto islandIndex = terrainTree.GetIslandIndex(nodeIndex);
 				assert(islandIndex != Core::c_InvalidIndexU);
 				if (islandIndex == startIslandIndex)
@@ -78,25 +115,29 @@ void PathFinder::FindPath(GameObjectId objectId, const glm::ivec2& targetField, 
 #if MEASURE_PATH_FINDING_EXECUTION_TIME || CREATE_PATH_FINDING_STATISTICS
 			printf("No route exists.\n");
 #endif
-			return;
+			return false;
 		}
 	}
 
 	switch (m_Algorithm)
 	{
-		case Algorithm::AStarOnly: SolveWithAStar(context, result); break;
-		case Algorithm::SimpleHierarchicalPathFinder: m_SimpleHierarchicalPathFinder.FindPath(context, result); break;
+		case Algorithm::AStarOnly: SolveWithAStar(context, distanceParameters, result); break;
+		case Algorithm::SimpleHierarchicalPathFinder:
+			m_SimpleHierarchicalPathFinder.FindPath(context, distanceParameters, result); break;
 	}
+
+	return true;
 }
 
-void PathFinder::SolveWithAStar(const PathFindingContext& context, GameObjectPath& result)
+void PathFinder::SolveWithAStar(const PathFindingContext& context,
+	const HeightDependentDistanceParameters* distanceParameters, GameObjectPath& result)
 {
 	auto& terrainTree = context.TerrainTree;
 
 	auto searchStartNode = terrainTree.GetNodeIndexForField(result.SourceField);
 	auto searchEndNode = terrainTree.GetNodeIndexForField(result.TargetField);
 
-	m_AStar.FindPath(context, searchStartNode, searchEndNode, result.MaxDistance, m_TempIndices);
+	m_AStar.FindPath(context, searchStartNode, searchEndNode, distanceParameters, m_TempIndices);
 
 	auto countFieldsInPath = m_TempIndices.GetSize();
 	for (unsigned i = 0; i < countFieldsInPath; i++)

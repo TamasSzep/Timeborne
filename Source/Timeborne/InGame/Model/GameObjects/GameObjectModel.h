@@ -5,6 +5,7 @@
 #include <Core/DataStructures/SimpleTypeVector.hpp>
 
 #include <memory>
+#include <vector>
 
 class ClientGameState;
 class CommandList;
@@ -14,6 +15,7 @@ struct GameObjectData;
 struct GameObjectLevelData;
 class GameObjectMovementSubsystem;
 class GameObjectFightSubsystem;
+class GameObjectSubsystem;
 class GameObjectWorkSubsystem;
 class Level;
 class MainApplication;
@@ -29,6 +31,7 @@ class GameObjectModel
 	std::unique_ptr<GameObjectMovementSubsystem> m_MovementSubsystem;
 	std::unique_ptr<GameObjectFightSubsystem> m_FightSubsystem;
 	std::unique_ptr<GameObjectWorkSubsystem> m_WorkSubsystem;
+	std::vector<GameObjectSubsystem*> m_Subsystems;
 
 	Core::IndexVectorU m_AvailableCommandIds;
 

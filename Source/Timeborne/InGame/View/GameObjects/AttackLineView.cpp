@@ -31,6 +31,7 @@ void AttackLineView::OnLoading(const ComponentRenderContext& context)
 
 	m_RendererIndices.clear();
 	m_SourceGameObjectIds.Clear();
+	m_DirtyIds.Clear();
 
 	auto& gameObjectList = m_GameState->GetGameObjects();
 	gameObjectList.AddPoseListenerOnce(*this);

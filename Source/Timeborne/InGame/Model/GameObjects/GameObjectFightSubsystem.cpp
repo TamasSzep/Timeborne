@@ -8,6 +8,7 @@
 #include <Timeborne/InGame/Model/GameObjects/Prototype/GameObjectPrototype.h>
 #include <Timeborne/InGame/Model/GameObjects/GameObject.h>
 #include <Timeborne/InGame/Model/GameObjects/GameObjectMovementSubsystem.h>
+#include <Timeborne/InGame/Model/Terrain/TerrainTree.h>
 #include <Timeborne/InGame/Model/Level.h>
 #include <Timeborne/InGame/Model/TickContext.h>
 #include <Timeborne/Math/Math.h>
@@ -57,7 +58,7 @@ void GameObjectFightSubsystem::OnRouteAdded(GameObjectId objectId, const GameObj
 {
 	// We handle the event, in which the game object was commanded to follow a non-attack route.
 
-	if (!m_ReactOnRouteEvents) return;
+	if (!m_ReactOnRouteEvents || m_Loading) return;
 
 	auto fIt = m_FightingObjects.find(objectId);
 	if (fIt != m_FightingObjects.end())
@@ -380,33 +381,13 @@ void GameObjectFightSubsystem::ProcessCommand(const GameObjectCommand& command)
 	m_ReactOnRouteEvents = true;
 }
 
-float GameObjectFightSubsystem::GetMaxDistance(const GameObject& sourceObject,
-	const AttackPrototypeData& sourceAttackPData,
-	const GameObjectPose& targetPose)
-{
-	const auto& sourceApproachPData = sourceAttackPData.Approach;
-
-	// We could use here a less surface-dependent height.
-	auto getHeight = [this](const GameObjectPose& pose){
-		auto position = pose.GetPosition2d();
-		auto fieldIndex = pose.GetTerrainFieldIndex();
-		auto offset = position - glm::dvec2(fieldIndex);
-		return m_Level.GetTerrain().GetHeight(fieldIndex, (float)offset.x, (float)offset.y);
-	};
-
-	float heightDiff = getHeight(sourceObject.Data.Pose) - getHeight(targetPose);
-
-	return sourceApproachPData.MaxDistance *
-		glm::clamp(1.0f + heightDiff * sourceApproachPData.HeightDistanceFactor,
-			sourceApproachPData.HeightDistanceMin,
-			sourceApproachPData.HeightDistanceMax);
-}
-
 bool GameObjectFightSubsystem::IsCloseEnoughForAttack(const GameObject& sourceObject,
 	const AttackPrototypeData& sourceAttackPData, const GameObjectPose& targetPose)
 {
 	float distance = (float)sourceObject.Data.Pose.GetDistance2d(targetPose);
-	float maxDistance = GetMaxDistance(sourceObject, sourceAttackPData, targetPose);
+	float maxDistance = sourceAttackPData.ApproachDistance.GetValue(
+		m_MovementSubsystem.GetPathFindingHeight(sourceObject.Data.Pose),
+		m_MovementSubsystem.GetPathFindingHeight(targetPose));
 	return (distance <= maxDistance);
 }
 
@@ -453,18 +434,16 @@ bool GameObjectFightSubsystem::CreateApproachRoute(const GameObject& sourceObjec
 {
 	constexpr float c_DistanceHysteresis = 2.0f;
 
-	float maxDistance = GetMaxDistance(sourceObject, sourceAttackPData, targetPose);
-	float approachDistance = std::max(maxDistance - c_DistanceHysteresis, 0.0f);
+	assert(sourceAttackPData.ApproachDistance.BaseDistance >= c_DistanceHysteresis);
+
+	auto approachData = sourceAttackPData.ApproachDistance;
+	approachData.BaseDistance -= c_DistanceHysteresis;
 
 	auto orientationTarget = sourceAttackPData.EnRouteAttacker ? GameObjectRoute::c_InvalidOrientationTarget
 		: targetPose.GetPosition2d();
 
-	// @todo: fix this bug. We only pass the approach distance which is computed based on the max distance
-	// in the CURRENT state. However the max distance changes when the heights change. Therefore, it must be
-	// reevaluted in an efficient way for each field in the path finding.
-
 	return m_MovementSubsystem.CreateRoute(sourceObject.Id, targetPose.GetTerrainFieldIndex(),
-		approachDistance, orientationTarget);
+		&approachData, orientationTarget);
 }
 
 bool GameObjectFightSubsystem::TurnAhead(GameObjectList& gameObjectList,

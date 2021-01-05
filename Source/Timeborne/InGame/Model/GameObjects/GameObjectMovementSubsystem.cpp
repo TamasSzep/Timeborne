@@ -25,8 +25,13 @@ GameObjectMovementSubsystem::~GameObjectMovementSubsystem()
 {
 }
 
-bool GameObjectMovementSubsystem::CreateRoute(GameObjectId objectId,
-	const glm::ivec2& targetField, float maxDistance, const glm::dvec2& orientationTarget)
+float GameObjectMovementSubsystem::GetPathFindingHeight(const GameObjectPose& pose) const
+{
+	return m_PathFinder->GetPathFindingHeight(pose);
+}
+
+bool GameObjectMovementSubsystem::CreateRoute(GameObjectId objectId, const glm::ivec2& targetField,
+	const HeightDependentDistanceParameters* distanceParameters, const glm::dvec2& orientationTarget)
 {
 	assert(m_GameObjectData.ClientModelGameState != nullptr);
 	const auto& gameObjectsMap = m_GameObjectData.ClientModelGameState->GetGameObjects().Get();
@@ -45,11 +50,8 @@ bool GameObjectMovementSubsystem::CreateRoute(GameObjectId objectId,
 
 	auto& route = routes.BeginAdd(objectId);
 
-	m_PathFinder->FindPath(objectId, targetField, maxDistance, route.Path);
-	bool pathEmpty = route.Path.Fields.IsEmpty();
-	auto lastField = pathEmpty ? route.Path.SourceField : route.Path.Fields.GetLastElement().FieldIndex;
-	bool pathValid = !pathEmpty
-		|| (maxDistance > 0.0f && glm::length(glm::vec2(lastField - targetField)) <= maxDistance);
+	
+	bool pathValid = m_PathFinder->FindPath(objectId, targetField, distanceParameters, route.Path);
 	if (pathValid)
 	{
 		route.OrientationTarget = orientationTarget;
@@ -76,7 +78,8 @@ void GameObjectMovementSubsystem::ProcessCommand(const GameObjectCommand& comman
 	auto countSources = command.SourceIds.GetSize();
 	for (unsigned i = 0; i < countSources; i++)
 	{
-		CreateRoute(command.SourceIds[i], command.TargetField, -1.0, GameObjectRoute::c_InvalidOrientationTarget);
+		CreateRoute(command.SourceIds[i], command.TargetField, nullptr,
+			GameObjectRoute::c_InvalidOrientationTarget);
 	}
 }
 

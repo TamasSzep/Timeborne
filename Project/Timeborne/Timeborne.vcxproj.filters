@@ -631,6 +631,9 @@
     <ClInclude Include="..\..\Source\Timeborne\Math\Math.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\HeightDependentDistanceParameters.h">
+      <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Resources\Shaders\DX11\LevelEditor\BlockTool.hlsl">

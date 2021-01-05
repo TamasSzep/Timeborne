@@ -4,8 +4,12 @@
 
 #include <Timeborne/InGame/Model/GameObjects/PathFinding/PathFinding.h>
 
+struct HeightDependentDistanceParameters;
+
 class SimpleHierarchicalPathFinder
 {
 public:
-	void FindPath(PathFindingContext& context, GameObjectPath& result);
+	void FindPath(PathFindingContext& context,
+		const HeightDependentDistanceParameters* distanceParameters,
+		GameObjectPath& result);
 };

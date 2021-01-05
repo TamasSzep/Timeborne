@@ -8,6 +8,8 @@
 #include <Core/Comparison.h>
 #include <Core/SingleElementPoolAllocator.hpp>
 
+struct HeightDependentDistanceParameters;
+
 class AStar
 {
 	// Storing the node with the lowest heuristic value in the lowest total value class.
@@ -56,5 +58,6 @@ class AStar
 public:
 	void FindPath(const PathFindingContext& context, 
 		unsigned startNodeIndex, unsigned endNodeIndex,
-		float maxDistance, Core::IndexVectorU& nodeIndices);
+		const HeightDependentDistanceParameters* distanceParameters,
+		Core::IndexVectorU& nodeIndices);
 };
