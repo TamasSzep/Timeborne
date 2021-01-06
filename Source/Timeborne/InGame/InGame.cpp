@@ -126,7 +126,7 @@ void InGame::InitializeOnLoading(const ComponentRenderContext& context)
 
 	// Creating the controller.
 	m_Controller = std::make_unique<InGameController>(*m_Level, *m_ClientGameState, *m_CommandList,
-		m_View->GetGameObjectVisibilityProvider(), *m_Camera, *context.Application, isLoadingFromSaveFile);
+		m_View->GetGameObjectVisibilityProvider(), *m_Camera, *context.Application);
 }
 
 void InGame::Enter(const ComponentRenderContext& context)
@@ -257,8 +257,15 @@ void InGame::SetInMainDialog(bool inMainDialog)
 
 void InGame::Tick()
 {
+	assert(m_ClientGameState != nullptr);
+
+	auto& modelGameState = m_ClientGameState->GetClientModelGameState();
+	modelGameState.IncreaseTickCount();
+	uint32_t tickCount = modelGameState.GetTickCount();
+
 	TickContext context;
-	context.updateIntervalInMillis = c_UpdateIntervalInMillis;
+	context.UpdateIntervalInMillis = c_UpdateIntervalInMillis;
+	context.TickCount = tickCount;
 
 	m_Model->Tick(context);
 }

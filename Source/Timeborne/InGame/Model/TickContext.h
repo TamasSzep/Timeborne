@@ -2,7 +2,10 @@
 
 #pragma once
 
+#include <cstdint>
+
 struct TickContext
 {
-	unsigned updateIntervalInMillis;
+	uint32_t UpdateIntervalInMillis;
+	uint32_t TickCount;
 };

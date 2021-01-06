@@ -42,6 +42,7 @@ struct GameObjectFightData
 
 	GameObjectId AttackTarget = c_InvalidGameObjectId;
 	AttackState AttackState = AttackState::None;
+	uint32_t LastAttackTimeMs = 0;
 
 	void SerializeSB(Core::ByteVector& bytes) const;
 	void DeserializeSB(const unsigned char*& bytes);

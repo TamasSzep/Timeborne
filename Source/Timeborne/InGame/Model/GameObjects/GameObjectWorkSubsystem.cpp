@@ -16,4 +16,5 @@ void GameObjectWorkSubsystem::Tick(const TickContext& context)
 
 void GameObjectWorkSubsystem::ProcessCommand(const GameObjectCommand& command)
 {
+	// Note that some of the source objects might not exist anymore.
 }

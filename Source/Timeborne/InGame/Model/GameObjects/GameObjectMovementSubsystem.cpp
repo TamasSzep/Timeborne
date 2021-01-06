@@ -35,11 +35,12 @@ bool GameObjectMovementSubsystem::CreateRoute(GameObjectId objectId, const glm::
 {
 	assert(m_GameObjectData.ClientModelGameState != nullptr);
 	const auto& gameObjectsMap = m_GameObjectData.ClientModelGameState->GetGameObjects().Get();
-	auto& routes = m_GameObjectData.ClientModelGameState->GetRoutes();
-	auto& prototypes = GameObjectPrototype::GetPrototypes();
 
 	auto gIt = gameObjectsMap.find(objectId);
-	assert(gIt != gameObjectsMap.end());
+	if (gIt == gameObjectsMap.end()) return false;
+
+	auto& routes = m_GameObjectData.ClientModelGameState->GetRoutes();
+	auto& prototypes = GameObjectPrototype::GetPrototypes();
 
 	const auto& gameObject = gIt->second;
 	auto& objectPrototype = *prototypes[(uint32_t)gameObject.Data.TypeIndex];
@@ -119,7 +120,7 @@ void GameObjectMovementSubsystem::Tick(const TickContext& context)
 
 	auto& prototypes = GameObjectPrototype::GetPrototypes();
 
-	double animTime = (double)context.updateIntervalInMillis * 1e-3;
+	double animTime = (double)context.UpdateIntervalInMillis * 1e-3;
 
 	m_RoutesToRemove.ClearAndReserve(routeContainer.GetSize());
 

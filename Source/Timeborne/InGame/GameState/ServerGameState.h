@@ -10,11 +10,16 @@
 
 class ServerGameState
 {
+	uint32_t m_TickCount = 0;
+
 	GameObjectList m_GameObjects;
 	GameObjectRouteList m_Routes;
 	GameObjectFightList m_FightList;
 
 public:
+
+	uint32_t GetTickCount() const;
+	void IncreaseTickCount();
 
 	const GameObjectList& GetGameObjects() const;
 	GameObjectList& GetGameObjects();

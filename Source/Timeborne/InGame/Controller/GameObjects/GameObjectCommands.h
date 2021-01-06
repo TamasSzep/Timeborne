@@ -19,7 +19,8 @@ struct LocalGameState;
 class MainApplication;
 class ServerGameState;
 
-class GameObjectCommands : public GameObjectVisibilityListener
+class GameObjectCommands : public GameObjectExistenceListener,
+	public GameObjectVisibilityListener
 {
 	const Level& m_Level;
 	const GameCreationData& m_GameCreationData;
@@ -36,14 +37,9 @@ class GameObjectCommands : public GameObjectVisibilityListener
 		SelectingSource
 	} m_State = State::SourceSelected;
 
-	glm::vec2 m_StartInCS;
-	glm::vec3 m_RayOrigin, m_RayDirection;
-
-	Core::SimpleTypeVectorU<GameObjectId> m_NewObjectIds;
-
-	GameObjectCommand m_NewCommand;
-
-	void LoadState();
+	glm::vec2 m_StartInCS = glm::vec2(-1);
+	glm::vec3 m_RayOrigin = glm::vec3(-1);
+	glm::vec3 m_RayDirection = glm::vec3(-1);
 
 	void SetSourceObjects();
 	void SetLastCommand();
@@ -58,6 +54,11 @@ class GameObjectCommands : public GameObjectVisibilityListener
 	bool IsSourceControllable() const;
 
 	// @todo: implement rectangular lasso for multiple objects.
+
+private: // Temporary in PreUpdate(...).
+
+	Core::SimpleTypeVectorU<GameObjectId> m_NewObjectIds;
+	GameObjectCommand m_NewCommand;
 
 private: // Input.
 
@@ -83,15 +84,20 @@ public:
 public:
 
 	GameObjectCommands(const Level& level, const GameCreationData& gameCreationData,
-		const ServerGameState& gameState,
+		ServerGameState& gameState,
 		LocalGameState& localGameState,
 		CommandList& commandList,
 		GameObjectVisibilityProvider& visibilityProvider,
 		EngineBuildingBlocks::Graphics::Camera& camera,
-		MainApplication& application, bool fromSaveFile);
+		MainApplication& application);
 	~GameObjectCommands() override;
 
 	void PreUpdate(const ComponentPreUpdateContext& context);
+
+public: // GameObjectExistenceListener IF.
+
+	void OnGameObjectAdded(const GameObject& object) override {}
+	void OnGameObjectRemoved(GameObjectId objectId) override;
 
 public: // GameObjectVisibilityListener IF.
 

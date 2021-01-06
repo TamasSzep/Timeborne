@@ -22,10 +22,10 @@ constexpr float c_MultipleSelectionThreshold = 0.02f;
 const glm::ivec2 c_InvalidTerrainIntersection(-1);
 
 GameObjectCommands::GameObjectCommands(const Level& level, const GameCreationData& gameCreationData,
-	const ServerGameState& gameState, LocalGameState& localGameState, CommandList& commandList,
+	ServerGameState& gameState, LocalGameState& localGameState, CommandList& commandList,
 	GameObjectVisibilityProvider& visibilityProvider,
 	EngineBuildingBlocks::Graphics::Camera& camera,
-	MainApplication& application, bool fromSaveFile)
+	MainApplication& application)
 	: GameObjectVisibilityListener(visibilityProvider)
 	, m_Level(level)
 	, m_GameCreationData(gameCreationData)
@@ -36,10 +36,7 @@ GameObjectCommands::GameObjectCommands(const Level& level, const GameCreationDat
 {
 	InitializeInput(application);
 
-	if (fromSaveFile)
-	{
-		LoadState();
-	}
+	gameState.GetGameObjects().AddExistenceListenerOnce(*this);
 }
 
 GameObjectCommands::~GameObjectCommands()
@@ -82,15 +79,6 @@ bool GameObjectCommands::HandleEvent(const EngineBuildingBlocks::Event* _event)
 		handled = true;
 	}
 	return handled;
-}
-
-void GameObjectCommands::LoadState()
-{
-	auto& sourceObjectIds = m_LocalGameState.ControllerGameState.SourceGameObjectIds;
-
-	m_NewObjectIds = sourceObjectIds;
-
-	// It's not necessary to load the last command.
 }
 
 void GameObjectCommands::SetSourceObjects()
@@ -258,6 +246,13 @@ bool GameObjectCommands::IsSourceControllable() const
 	}
 
 	return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void GameObjectCommands::OnGameObjectRemoved(GameObjectId objectId)
+{
+	m_LocalGameState.ControllerGameState.SourceGameObjectIds.RemoveFirst(objectId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -7,10 +7,10 @@
 
 InGameController::InGameController(const Level& level, ClientGameState& clientGameState,
 	CommandList& commandList, GameObjectVisibilityProvider& visibilityProvider,
-	EngineBuildingBlocks::Graphics::Camera& camera, MainApplication& application, bool fromSaveFile)
+	EngineBuildingBlocks::Graphics::Camera& camera, MainApplication& application)
 	: m_GameObjectCommands(std::make_unique<GameObjectCommands>(level, clientGameState.GetGameCreationData(),
 		clientGameState.GetSyncedGameState(), clientGameState.GetLocalGameState(),
-		commandList, visibilityProvider, camera, application, fromSaveFile))
+		commandList, visibilityProvider, camera, application))
 {
 }
 

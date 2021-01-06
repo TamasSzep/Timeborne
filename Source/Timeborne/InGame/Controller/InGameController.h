@@ -22,7 +22,7 @@ public:
 	InGameController(const Level& level, ClientGameState& clientGameState,	
 		CommandList& commandList, GameObjectVisibilityProvider& visibilityProvider, 
 		EngineBuildingBlocks::Graphics::Camera& camera,
-		MainApplication& application, bool fromSaveFile);
+		MainApplication& application);
 	~InGameController();
 
 	bool HandleEvent(const EngineBuildingBlocks::Event* _event);

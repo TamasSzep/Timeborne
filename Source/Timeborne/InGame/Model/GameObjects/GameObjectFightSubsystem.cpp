@@ -97,7 +97,7 @@ void GameObjectFightSubsystem::Tick(const TickContext& context)
 	m_FightingObjectsToRemove.ClearAndReserveWithGrow((uint32_t)m_FightingObjects.size());
 	m_ChangedFightStates.Clear();
 
-	double animTime = (double)context.updateIntervalInMillis * 1e-3;
+	double animTime = (double)context.UpdateIntervalInMillis * 1e-3;
 
 	for (auto sourceId : m_FightingObjects)
 	{
@@ -113,8 +113,9 @@ void GameObjectFightSubsystem::Tick(const TickContext& context)
 
 		const auto& sourceObject = sgIt->second;
 		auto& sourceFightData = fightList[sourceObject.FightIndex];
+		auto attackTarget = sourceFightData.AttackTarget;
 
-		assert(sourceFightData.AttackState != AttackState::None && sourceFightData.AttackTarget != c_InvalidGameObjectId);
+		assert(sourceFightData.AttackState != AttackState::None && attackTarget != c_InvalidGameObjectId);
 
 		auto changeAttackState = [this, &sourceFightData, sourceId](AttackState state) {
 			assert(sourceFightData.AttackState != state);
@@ -127,7 +128,7 @@ void GameObjectFightSubsystem::Tick(const TickContext& context)
 			m_ChangedFightStates.PushBack(sourceId);
 		};
 
-		auto tgIt = gameObjects.find(sourceFightData.AttackTarget);
+		auto tgIt = gameObjects.find(attackTarget);
 
 		// The TARGET might be destroyed by another game object or another mechanism.
 		// VERY IMPORTANT: alone because of this check the game object indices are NOT allowed to be reused.
@@ -202,18 +203,18 @@ void GameObjectFightSubsystem::Tick(const TickContext& context)
 					if (IsTurnedAheadForAttack(sourceObject, sourceAttackPrototype, targetObject.Data.Pose))
 					{
 						auto hpBefore = targetFightData.HealthPoints;
-						Attack(sourceAttackPrototype, targetFightData, restAnimTime);
+						Attack(context, sourceAttackPrototype, sourceFightData, targetFightData, restAnimTime);
 						auto hpAfter = targetFightData.HealthPoints;
 
 						if (hpAfter == 0)
 						{
 							changeAttackState(AttackState::None);
-							gameObjectList.Remove(sourceFightData.AttackTarget);
+							gameObjectList.Remove(attackTarget);
 							break;
 						}
 						else if (hpAfter != hpBefore)
 						{
-							m_ChangedFightStates.PushBack(sourceFightData.AttackTarget);
+							m_ChangedFightStates.PushBack(attackTarget);
 						}
 					}
 					else if (sourceAttackPrototype.EnRouteAttacker)
@@ -286,11 +287,8 @@ void GameObjectFightSubsystem::ProcessCommand(const GameObjectCommand& command)
 	assert(tgIt != gameObjects.end());
 	auto& targetObject = tgIt->second;
 
-	if (targetObject.FightIndex == Core::c_InvalidIndexU)
-	{
-		// Cannot attack objects outside of the fight subsystem.
-		return;
-	}
+	// Cannot attack objects outside of the fight subsystem.
+	if (targetObject.FightIndex == Core::c_InvalidIndexU) return;
 
 	// @todo: implement approaching smarter.
 
@@ -300,7 +298,12 @@ void GameObjectFightSubsystem::ProcessCommand(const GameObjectCommand& command)
 		auto sourceId = command.SourceIds[i];
 
 		auto sgIt = gameObjects.find(sourceId);
-		assert(sgIt != gameObjects.end());
+		if (sgIt == gameObjects.end())
+		{
+			// The source object doesn't exist anymore: skipping it.
+			continue;
+		}
+
 		auto& sourceObject = sgIt->second;
 
 		if (sourceObject.FightIndex == Core::c_InvalidIndexU ||
@@ -326,10 +329,8 @@ void GameObjectFightSubsystem::ProcessCommand(const GameObjectCommand& command)
 		const auto& sourceFightPrototype = sourcePrototype.GetFight();
 		const auto& sourceAttackPrototype = sourceFightPrototype.GroundAttack;
 
-		if (sourceAttackPrototype.Type == AttackType::None)
-		{
-			continue;
-		}
+		// If the source object cannot attack: skipping the source.
+		if (sourceAttackPrototype.Type == AttackType::None) continue;
 
 		DeleteRoute(sourceId);
 
@@ -453,9 +454,27 @@ bool GameObjectFightSubsystem::TurnAhead(GameObjectList& gameObjectList,
 	return true;
 }
 
-void GameObjectFightSubsystem::Attack(const AttackPrototypeData& sourceAttackPData,
-	const GameObjectFightData& targetFightData, double& restAnimTime)
+void GameObjectFightSubsystem::Attack(const TickContext& context, const AttackPrototypeData& sourceAttackPData,
+	GameObjectFightData& sourceFightData, GameObjectFightData& targetFightData, double& restAnimTime)
 {
-	// @todo
+	// The attack happens at a given time point - not throughout a time duration.
+
+	uint32_t restAnimTimeMs = (uint32_t)std::round(restAnimTime * 1e3);
+
+	uint32_t endTimeMs = context.TickCount * context.UpdateIntervalInMillis;
+	uint32_t lastAttackTimeMs = sourceFightData.LastAttackTimeMs;
+	uint32_t currentAttackTimeMs = lastAttackTimeMs + sourceAttackPData.ReattackDurationMs;
+
+	if (endTimeMs >= currentAttackTimeMs)
+	{
+		uint32_t attackTimeOffsetMs = std::min(endTimeMs - currentAttackTimeMs, restAnimTimeMs);
+		sourceFightData.LastAttackTimeMs = endTimeMs - attackTimeOffsetMs;
+
+		uint32_t hitPoints = sourceAttackPData.HitPoints;
+		uint32_t hp = targetFightData.HealthPoints;
+		hp -= std::min(hitPoints, hp);
+		targetFightData.HealthPoints = hp;
+	}
+
 	restAnimTime = 0.0;
 }

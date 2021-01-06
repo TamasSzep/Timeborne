@@ -52,8 +52,10 @@ class GameObjectFightSubsystem : public GameObjectSubsystem
 	bool TurnAhead(GameObjectList& gameObjectList,
 		GameObjectId objectId, const GameObjectPose& targetPose,
 		double& restAnimTime);
-	void Attack(const AttackPrototypeData& sourceAttackPData,
-		const GameObjectFightData& targetFightData,
+	void Attack(const TickContext& context,
+		const AttackPrototypeData& sourceAttackPData,
+		GameObjectFightData& sourceFightData,
+		GameObjectFightData& targetFightData,
 		double& restAnimTime);
 
 public:

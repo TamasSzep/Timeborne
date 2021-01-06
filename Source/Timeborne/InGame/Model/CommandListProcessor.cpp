@@ -34,7 +34,7 @@ void CommandListProcessor::Tick(const TickContext& context)
 
 	// Updating the available action points.
 	auto n = m_Settings.ActionPointsPerSecond;
-	auto d = 1000 / context.updateIntervalInMillis;
+	auto d = 1000 / context.UpdateIntervalInMillis;
 	auto currentActionPoints = (n / d) + ((m_TickIndex < n % d) ? 1 : 0);
 	m_TickIndex = (m_TickIndex + 1) % d;
 	m_ActionPoints = std::min(m_ActionPoints + currentActionPoints, m_Settings.ActionPointCapacity);
@@ -72,7 +72,10 @@ unsigned CommandListProcessor::GetGameObjectCommandCost(const GameObjectCommand&
 	{
 		auto objectId = command.SourceIds[j];
 		auto oIt = gameObjectsMap.find(objectId);
-		assert(oIt != gameObjectsMap.end());
+
+		// If the game object does not exist anymore, skipping it. Note that the object stays in the command.
+		if (oIt == gameObjectsMap.end()) continue;
+
 		const auto& object = oIt->second;
 		cost += prototypes[(uint32_t)object.Data.TypeIndex]->GetActionCost();
 	}
