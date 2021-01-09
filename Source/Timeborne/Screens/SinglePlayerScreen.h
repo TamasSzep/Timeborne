@@ -1,4 +1,4 @@
-// Timeborne/GameCreation/SinglePlayerScreen.h
+// Timeborne/Screens/SinglePlayerScreen.h
 
 #pragma once
 

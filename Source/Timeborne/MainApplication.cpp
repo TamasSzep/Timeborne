@@ -8,12 +8,12 @@
 #include <EngineBuildingBlocks/Input/DefaultInputBinder.h>
 #include <DirectX11Render/GraphicsDevice.h>
 
-#include <Timeborne/GameCreation/SinglePlayerScreen.h>
 #include <Timeborne/GUI/NuklearGUI.h>
-#include <Timeborne/InGame/InGame.h>
-#include <Timeborne/LevelEditor/LevelEditor.h>
-#include <Timeborne/MainMenu/MainMenu.h>
 #include <Timeborne/Misc/UserConfiguration.h>
+#include <Timeborne/Screens/InGameScreen.h>
+#include <Timeborne/Screens/LevelEditorScreen.h>
+#include <Timeborne/Screens/MainMenuScreen.h>
+#include <Timeborne/Screens/SinglePlayerScreen.h>
 
 #include <windows.h>
 
@@ -49,10 +49,10 @@ MainApplication::MainApplication(int argc, char *argv[])
 void MainApplication::InitializeComponents()
 {
 	// Adding screens.
-	m_Screens.push_back(std::make_unique<MainMenu>());
+	m_Screens.push_back(std::make_unique<MainMenuScreen>());
 	m_Screens.push_back(std::make_unique<SinglePlayerScreen>());
-	m_Screens.push_back(std::make_unique<InGame>(m_PathHandler));
-	m_Screens.push_back(std::make_unique<LevelEditor>());
+	m_Screens.push_back(std::make_unique<InGameScreen>());
+	m_Screens.push_back(std::make_unique<LevelEditorScreen>());
 	for (auto& screen : m_Screens)
 	{
 		m_Components.push_back(screen.get());

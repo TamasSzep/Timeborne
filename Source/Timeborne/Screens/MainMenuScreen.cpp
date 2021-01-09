@@ -1,6 +1,6 @@
-// Timeborne/MainMenu/MainMenu.cpp
+// Timeborne/Screens/MainMenuScreen.cpp
 
-#include <Timeborne/MainMenu/MainMenu.h>
+#include <Timeborne/Screens/MainMenuScreen.h>
 
 #include <Timeborne/GUI/NuklearHelper.h>
 #include <Timeborne/Misc/ScreenResolution.h>
@@ -11,49 +11,49 @@ inline glm::vec4 ToFColor(nk_color color) { glm::vec4 res(glm::uninitialize); nk
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-MainMenu::MainMenu()
+MainMenuScreen::MainMenuScreen()
 {
 	Reset();
 }
 
-MainMenu::~MainMenu()
+MainMenuScreen::~MainMenuScreen()
 {
 }
 
-void MainMenu::Reset()
+void MainMenuScreen::Reset()
 {
 	m_NextScreen = ApplicationScreens::MainMenu;
 	m_HasConsole = false;
 }
 
-void MainMenu::Enter(const ComponentRenderContext& context)
+void MainMenuScreen::Enter(const ComponentRenderContext& context)
 {
 	context.Application->SetAllowGUIActiveTracking(false);
 
 	Reset();
 }
 
-void MainMenu::Exit()
+void MainMenuScreen::Exit()
 {
 }
 
-void MainMenu::DerivedInitializeMain(const ComponentInitContext& context)
+void MainMenuScreen::DerivedInitializeMain(const ComponentInitContext& context)
 {
 }
 
-void MainMenu::InitializeRendering(const ComponentRenderContext& context)
+void MainMenuScreen::InitializeRendering(const ComponentRenderContext& context)
 {
 }
 
-void MainMenu::DestroyMain()
+void MainMenuScreen::DestroyMain()
 {
 }
 
-void MainMenu::DestroyRendering()
+void MainMenuScreen::DestroyRendering()
 {
 }
 
-bool MainMenu::HandleEvent(const EngineBuildingBlocks::Event* _event)
+bool MainMenuScreen::HandleEvent(const EngineBuildingBlocks::Event* _event)
 {
 	auto eci = _event->ClassId;
 	if (eci == m_EscapeECI)
@@ -64,25 +64,25 @@ bool MainMenu::HandleEvent(const EngineBuildingBlocks::Event* _event)
 	return false;
 }
 
-void MainMenu::PreUpdate(const ComponentPreUpdateContext& context)
+void MainMenuScreen::PreUpdate(const ComponentPreUpdateContext& context)
 {
 }
 
-void MainMenu::PostUpdate(const ComponentPostUpdateContext& context)
+void MainMenuScreen::PostUpdate(const ComponentPostUpdateContext& context)
 {
 }
 
-void MainMenu::RenderFullscreenClear(const ComponentRenderContext& context)
+void MainMenuScreen::RenderFullscreenClear(const ComponentRenderContext& context)
 {
 	auto backgroundColor = ToFColor(nk_rgb(28, 48, 62));
 	context.DeviceContext->ClearRenderTargetView(context.RTV, glm::value_ptr(backgroundColor));
 }
 
-void MainMenu::RenderContent(const ComponentRenderContext& context)
+void MainMenuScreen::RenderContent(const ComponentRenderContext& context)
 {
 }
 
-void MainMenu::RenderGUI(const ComponentRenderContext& context)
+void MainMenuScreen::RenderGUI(const ComponentRenderContext& context)
 {
 	if (m_IsExiting)
 	{

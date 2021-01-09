@@ -2,36 +2,33 @@
 
 #pragma once
 
-#include <Timeborne/ApplicationComponent.h>
-
 #include <Timeborne/Declarations/EngineBuildingBlocksDeclarations.h>
-#include <Timeborne/GameCreation/GameCreationData.h>
 
 #include <chrono>
 #include <memory>
+#include <string>
 #include <vector>
 
 class ClientGameState;
+struct ComponentInitContext;
+struct ComponentPreUpdateContext;
+struct ComponentPostUpdateContext;
+struct ComponentRenderContext;
 class CommandList;
 class GameCamera;
-class InGameComponent;
+struct GameCreationData;
 class InGameController;
 class InGameModel;
 class InGameView;
 class Level;
-class Nuklear_TextBox;
-class LoadGameGUIControl;
-class SaveGameGUIControl;
 
-class InGame : public ApplicationScreen
+class InGame
 {
-	const EngineBuildingBlocks::PathHandler& m_PathHandler;
-
 private: // Level data.
 
 	std::unique_ptr<Level> m_Level;
 
-	void LoadLevel();
+	void LoadLevel(const EngineBuildingBlocks::PathHandler& pathHandler);
 
 private: // Components.
 
@@ -47,29 +44,31 @@ private: // Input.
 
 	unsigned m_PauseECI;
 
-protected:
+public:
 
-	void DerivedInitializeMain(const ComponentInitContext& context);
+	InGame();
+	~InGame();
+
+	void InitializeMain(const ComponentInitContext& context);
+	void InitializeRendering(const ComponentRenderContext& context);
+	void DestroyMain();
+	void DestroyRendering();
+	bool HandleEvent(const EngineBuildingBlocks::Event* _event);
+	void PreUpdate(const ComponentPreUpdateContext& context);
+	void PostUpdate(const ComponentPostUpdateContext& context);
+	void RenderFullscreenClear(const ComponentRenderContext& context);
+	void RenderContent(const ComponentRenderContext& context);
+	void RenderGUI(const ComponentRenderContext& context);
 
 public:
 
-	explicit InGame(const EngineBuildingBlocks::PathHandler& pathHandler);
-	~InGame() override;
-
-	void InitializeRendering(const ComponentRenderContext& context) override;
-	void DestroyMain() override;
-	void DestroyRendering() override;
-	bool HandleEvent(const EngineBuildingBlocks::Event* _event) override;
-	void PreUpdate(const ComponentPreUpdateContext& context) override;
-	void PostUpdate(const ComponentPostUpdateContext& context) override;
-	void RenderFullscreenClear(const ComponentRenderContext& context) override;
-	void RenderContent(const ComponentRenderContext& context) override;
-	void RenderGUI(const ComponentRenderContext& context) override;
-
-	void Enter(const ComponentRenderContext& context) override;
-	void Exit() override;
+	bool IsMultiplayerGame() const;
+	bool IsPaused() const;
+	void TriggerPauseSwitch();
+	void SetControlsActive(bool active);
 
 private:
+
 	void Reset();
 
 private: // Client-server state syncing.
@@ -80,46 +79,31 @@ private: // Client-server state syncing.
 
 public: // Create.
 
-	bool HasLevel(const char* levelName) const;
+	bool HasLevel(const char* levelName,
+		const EngineBuildingBlocks::PathHandler& pathHandler) const;
 	void CreateNewGame(const GameCreationData& data);
-	void RemapPlayerIndices();
-
-	enum class LoadSource
-	{
-		Level, SaveFile, SaveFileInGame
-	};
-	LoadSource m_LoadSource;
+	void LoadGameFromLevel(const ComponentRenderContext& context);
 
 public: // Load, save.
 
-	bool IsSaveFileValid(const char* saveFileName) const;
-	void LoadGame(const char* saveFileName);
+	bool IsSaveFileValid(const char* saveFileName,
+		const EngineBuildingBlocks::PathHandler& pathHandler) const;
+	void LoadGameFromSaveFile(const ComponentRenderContext& context,
+		bool clearState,
+		const char* saveFileName,
+		std::string& loadError);
+	void SaveGame(const char* saveFileName,
+		const EngineBuildingBlocks::PathHandler& pathHandler) const;
 
 private:
 
-	void InitializeOnLoading(const ComponentRenderContext& context);
-	std::string GetSavePath(const char* fileName) const;
-	void LoadGame(const ComponentRenderContext& context);
-	void HandleLoadError();
-	void SaveGame();
-	void ResetLoadSaveSubDialogState();
+	std::string GetSavePath(const char* fileName,
+		const EngineBuildingBlocks::PathHandler& pathHandler) const;
 
-	enum class SubDialog { None, Load, Save } m_SubDialog = SubDialog::None;
+	void RemapPlayerIndices();
 
-	std::unique_ptr<LoadGameGUIControl> m_LoadGameGUIControl;
-	std::unique_ptr<SaveGameGUIControl> m_SaveGameGUIControl;
-
-	std::chrono::steady_clock::time_point m_SaveTime;
-
-	std::string m_SaveFileName;
-
-	bool m_HasExternalLoadError = false;
-
-	void CreateLoadSubDialog(const ComponentRenderContext& context);
-	void CreateSaveSubDialog(const ComponentRenderContext& context);
-	void CreateGameSavedLabel(const ComponentRenderContext& context);
-
-	std::string m_LoadError;
+	void InitializeOnLoading(const ComponentRenderContext& context,
+		bool loadingFromLevel);
 
 private: // Rendering.
 
@@ -143,15 +127,4 @@ private: // Game update.
 	void DoGameUpdate();
 	void DirectUpdate(double dt);
 	void Tick();
-
-private: // GUI.
-
-	bool m_InMainDialog = false;
-	bool m_WasPausedBeforeMainDialog = false;
-
-	std::chrono::steady_clock::time_point m_InputFreezeTime;
-
-	void SetInMainDialog(bool inMainDialog);
-
-	void CreateMainDialogGUI(const ComponentRenderContext& context);
 };

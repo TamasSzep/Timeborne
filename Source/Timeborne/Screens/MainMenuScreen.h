@@ -1,4 +1,4 @@
-// Timeborne/MainMenu/MainMenu.h
+// Timeborne/Screens/MainMenuScreen.h
 
 #pragma once
 
@@ -6,7 +6,7 @@
 
 struct nk_context;
 
-class MainMenu : public ApplicationScreen
+class MainMenuScreen : public ApplicationScreen
 {
 	bool m_IsExiting = false;
 
@@ -16,8 +16,8 @@ protected:
 
 public:
 
-	MainMenu();
-	~MainMenu() override;
+	MainMenuScreen();
+	~MainMenuScreen() override;
 
 	void InitializeRendering(const ComponentRenderContext& context) override;
 	void DestroyMain() override;

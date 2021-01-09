@@ -48,9 +48,6 @@
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{45290876-77a4-483c-a896-3227f9f0de89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MainMenu">
-      <UniqueIdentifier>{baa8f41b-86d1-4396-b567-901adf0b7778}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\LevelEditor\Terrain">
       <UniqueIdentifier>{31ecd8c0-bbc2-438c-afe3-f5a0166e26f8}</UniqueIdentifier>
     </Filter>
@@ -110,6 +107,9 @@
     </Filter>
     <Filter Include="Resource Files\Shaders\HLSL">
       <UniqueIdentifier>{127807af-ba87-4771-8906-cfe670856e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screens">
+      <UniqueIdentifier>{f2958d2a-c8a4-4115-9649-3c1d2c3d5e44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,9 +175,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\ApplicationComponent.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\Timeborne\MainMenu\MainMenu.cpp">
-      <Filter>Source Files\MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.cpp">
       <Filter>Source Files\LevelEditor\Terrain</Filter>
@@ -311,9 +308,6 @@
     <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\GameObjects\GameObjectCommand.cpp">
       <Filter>Source Files\InGame\Controller\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.cpp">
-      <Filter>Source Files\GameCreation</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
@@ -340,6 +334,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\InGame\View\GameObjects\AttackLineView.cpp">
       <Filter>Source Files\InGame\View\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\InGameScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\MainMenuScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -432,9 +438,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearD3D11Include.h">
       <Filter>Source Files\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\Timeborne\MainMenu\MainMenu.h">
-      <Filter>Source Files\MainMenu</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\LevelEditor\Terrain\TerrainCopyTool.h">
       <Filter>Source Files\LevelEditor\Terrain</Filter>
@@ -589,9 +592,6 @@
     <ClInclude Include="..\..\Source\Timeborne\InGame\View\BottomControl.h">
       <Filter>Source Files\InGame\View</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Timeborne\GameCreation\SinglePlayerScreen.h">
-      <Filter>Source Files\GameCreation</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.h">
       <Filter>Source Files\GUI</Filter>
     </ClInclude>
@@ -633,6 +633,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\HeightDependentDistanceParameters.h">
       <Filter>Source Files\InGame\Model\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\InGameScreen.h">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.h">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\MainMenuScreen.h">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.h">
+      <Filter>Source Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

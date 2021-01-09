@@ -1,13 +1,13 @@
-// Timeborne/GameCreation/SinglePlayerScreen.cpp
+// Timeborne/Screens/SinglePlayerScreen.cpp
 
-#include <Timeborne/GameCreation/SinglePlayerScreen.h>
+#include <Timeborne/Screens/SinglePlayerScreen.h>
 
 #include <Timeborne/GUI/LoadSaveGUIControl.h>
 #include <Timeborne/GUI/NuklearHelper.h>
 #include <Timeborne/GUI/TimeborneGUI.h>
 #include <Timeborne/InGame/Model/Level.h>
-#include <Timeborne/InGame/InGame.h>
 #include <Timeborne/Render/PlayerColors.h>
+#include <Timeborne/Screens/InGameScreen.h>
 #include <Timeborne/MainApplication.h>
 
 constexpr uint32_t c_MaxCountAlliances = 8;
@@ -152,9 +152,9 @@ void SinglePlayerScreen::RenderGUI(const ComponentRenderContext& context)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-InGame* GetInGameScreen(MainApplication* application)
+InGameScreen* GetInGameScreen(MainApplication* application)
 {
-	return dynamic_cast<InGame*>(application->GetScreen(ApplicationScreens::InGame));
+	return dynamic_cast<InGameScreen*>(application->GetScreen(ApplicationScreens::InGame));
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -352,7 +352,7 @@ void SinglePlayerScreen::LoadSavedGame()
 
 	if (inGameScreen->IsSaveFileValid(saveGameFile))
 	{
-		inGameScreen->LoadGame(saveGameFile);
+		inGameScreen->SetupLoadGame(saveGameFile);
 
 		m_NextScreen = ApplicationScreens::InGame;
 	}
