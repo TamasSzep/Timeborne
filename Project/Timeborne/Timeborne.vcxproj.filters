@@ -660,7 +660,6 @@
     <None Include="..\..\Resources\Shaders\DX11\TerrainWall.hlsl">
       <Filter>Resource Files\Shaders\DX11</Filter>
     </None>
-    <None Include="..\..\Resources\Shaders\DX11\TextRender.hlsl" />
     <None Include="..\..\Resources\Shaders\DX11\BackgroundCubemap.hlsl">
       <Filter>Resource Files\Shaders\DX11</Filter>
     </None>
@@ -672,6 +671,9 @@
     </None>
     <None Include="..\..\Resources\Shaders\HLSL\Structures.hlsl">
       <Filter>Resource Files\Shaders\HLSL</Filter>
+    </None>
+    <None Include="..\..\Resources\Shaders\DX11\TextRender.hlsl">
+      <Filter>Resource Files\Shaders\DX11</Filter>
     </None>
   </ItemGroup>
 </Project>
