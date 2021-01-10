@@ -10,6 +10,7 @@
 
 struct GameCreationData;
 class InGame;
+class InGameStatistics;
 class LoadGameGUIControl;
 class SaveGameGUIControl;
 
@@ -51,6 +52,12 @@ public: // Load, save.
 	bool IsSaveFileValid(const char* saveFileName) const;
 	void SetupLoadGame(const char* saveFileName);
 
+public: // Game result.
+
+	bool IsGameEnded() const;
+	const GameCreationData& GetGameCreationData() const;
+	const InGameStatistics& GetStatistics() const;
+
 private:
 
 	void LoadGameFromSaveFile(const ComponentRenderContext& context, bool clearState);
@@ -83,6 +90,8 @@ private:
 
 private: // GUI.
 
+	bool m_InEndDialog = false;
+	bool m_EndDialogHasBeenShown = false;
 	bool m_InMainDialog = false;
 	bool m_WasPausedBeforeMainDialog = false;
 
@@ -91,4 +100,5 @@ private: // GUI.
 	void SetInMainDialog(bool inMainDialog);
 
 	void CreateMainDialogGUI(const ComponentRenderContext& context);
+	void CreateEndDialog(const ComponentRenderContext& context);
 };

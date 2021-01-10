@@ -44,28 +44,53 @@ bool InGame::IsPaused() const
 
 bool InGame::IsGameEnded() const
 {
+	assert(m_ClientGameState != nullptr);
+	return m_ClientGameState->GetClientModelGameState().IsGameEnded();
+}
+
+const GameCreationData& InGame::GetGameCreationData() const
+{
+	assert(m_ClientGameState != nullptr);
+	return m_ClientGameState->GetGameCreationData();
+}
+
+const InGameStatistics& InGame::GetStatistics() const
+{
+	assert(m_ClientGameState != nullptr);
+	return m_ClientGameState->GetLocalGameState().GetStatistics();
+}
+
+void InGame::CheckGameEnded()
+{
+	assert(m_ClientGameState != nullptr);
+
 	// @todo: we will be able to use player data.
 	
+	bool gameEnded = true;
+	uint32_t winnerAlliance = Core::c_InvalidIndexU;
+
 	// The game is ended if there is only zero or one alliance with game objects.
-	assert(m_ClientGameState != nullptr);
-	uint32_t allianceIndex = Core::c_InvalidIndexU;
 	const auto& gcPlayerData = m_ClientGameState->GetGameCreationData().Players;
 	for (auto& gameObjectData : m_ClientGameState->GetClientModelGameState().GetGameObjects().Get())
 	{
 		auto playerIndex = gameObjectData.second.Data.PlayerIndex;
 		if (playerIndex == Core::c_InvalidIndexU) continue;
 
-		auto cAllianceIndex = gcPlayerData[playerIndex].AllianceIndex;
-		if (allianceIndex == Core::c_InvalidIndexU)
+		auto allianceIndex = gcPlayerData[playerIndex].AllianceIndex;
+		if (winnerAlliance == Core::c_InvalidIndexU)
 		{
-			allianceIndex = cAllianceIndex;
+			winnerAlliance = allianceIndex;
 		}
-		else if (cAllianceIndex != allianceIndex)
+		else if (allianceIndex != winnerAlliance)
 		{
-			return false;
+			gameEnded = false;
+			winnerAlliance = Core::c_InvalidIndexU;
+			break;
 		}
 	}
-	return true;
+
+	m_ClientGameState->GetClientModelGameState().SetGameEnded(gameEnded);
+	m_ClientGameState->GetLocalGameState().GetStatistics().SetWinnerAlliance(winnerAlliance);
 }
 
 void InGame::TriggerPauseSwitch()
@@ -78,12 +103,6 @@ void InGame::TriggerPauseSwitch()
 void InGame::SetControlsActive(bool active)
 {
 	m_Camera->SetActive(active);
-}
-
-const InGameStatistics& InGame::GetStatistics() const
-{
-	assert(m_ClientGameState != nullptr);
-	return m_ClientGameState->GetLocalGameState().GetStatistics();
 }
 
 void InGame::Reset()
@@ -272,10 +291,17 @@ void InGame::DoGameUpdate()
 	}
 
 	// Stepping when the interval is completely expired.
+	bool ticked = false;
 	for (int i = 0; i < c_MaxUpdates && m_NextUpdateTime <= currentTime; i++)
 	{
 		Tick();
 		m_NextUpdateTime += std::chrono::milliseconds(c_UpdateIntervalInMillis);
+		ticked = true;
+	}
+
+	if (ticked)
+	{
+		CheckGameEnded();
 	}
 
 	if (m_NextUpdateTime <= currentTime)

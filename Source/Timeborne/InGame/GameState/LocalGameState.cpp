@@ -43,6 +43,11 @@ const InGameStatistics& LocalGameState::GetStatistics() const
 	return m_Statistics;
 }
 
+InGameStatistics& LocalGameState::GetStatistics()
+{
+	return m_Statistics;
+}
+
 void LocalGameState::SerializeSB(Core::ByteVector& bytes) const
 {
 	Core::SerializeSB(bytes, m_GameCameraState);

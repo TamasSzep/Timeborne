@@ -31,6 +31,7 @@ public:
 	ControllerGameState& GetControllerGameState();
 
 	const InGameStatistics& GetStatistics() const;
+	InGameStatistics& GetStatistics();
 
 	void SerializeSB(Core::ByteVector& bytes) const;
 	void DeserializeSB(const unsigned char*& bytes);

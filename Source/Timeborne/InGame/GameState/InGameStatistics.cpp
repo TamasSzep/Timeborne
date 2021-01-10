@@ -89,12 +89,24 @@ const Core::IndexVectorU& InGameStatistics::GetLostBuildings(uint32_t playerInde
 	return m_TempIndexVector;
 }
 
+uint32_t InGameStatistics::GetWinnerAlliance() const
+{
+	return m_WinnerAlliance;
+}
+
+void InGameStatistics::SetWinnerAlliance(uint32_t winnerAlliance)
+{
+	m_WinnerAlliance = winnerAlliance;
+}
+
 void InGameStatistics::SerializeSB(Core::ByteVector& bytes) const
 {
 	Core::SerializeSB(bytes, m_PlayerData);
+	Core::SerializeSB(bytes, m_WinnerAlliance);
 }
 
 void InGameStatistics::DeserializeSB(const unsigned char*& bytes)
 {
 	Core::DeserializeSB(bytes, m_PlayerData);
+	Core::DeserializeSB(bytes, m_WinnerAlliance);
 }

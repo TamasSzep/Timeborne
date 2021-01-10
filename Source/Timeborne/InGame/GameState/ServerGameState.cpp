@@ -14,6 +14,16 @@ void ServerGameState::IncreaseTickCount()
 	++m_TickCount;
 }
 
+bool ServerGameState::IsGameEnded() const
+{
+	return m_GameEnded;
+}
+
+void ServerGameState::SetGameEnded(bool gameEnded)
+{
+	m_GameEnded = gameEnded;
+}
+
 const GameObjectList& ServerGameState::GetGameObjects() const
 {
 	return m_GameObjects;
@@ -47,6 +57,7 @@ GameObjectFightList& ServerGameState::GetFightList()
 void ServerGameState::SerializeSB(Core::ByteVector& bytes) const
 {
 	Core::SerializeSB(bytes, m_TickCount);
+	Core::SerializeSB(bytes, m_GameEnded);
 	Core::SerializeSB(bytes, m_GameObjects);
 	Core::SerializeSB(bytes, m_Routes);
 	Core::SerializeSB(bytes, m_FightList);
@@ -55,6 +66,7 @@ void ServerGameState::SerializeSB(Core::ByteVector& bytes) const
 void ServerGameState::DeserializeSB(const unsigned char*& bytes)
 {
 	Core::DeserializeSB(bytes, m_TickCount);
+	Core::DeserializeSB(bytes, m_GameEnded);
 	Core::DeserializeSB(bytes, m_GameObjects);
 	Core::DeserializeSB(bytes, m_Routes);
 	Core::DeserializeSB(bytes, m_FightList);

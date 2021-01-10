@@ -35,6 +35,7 @@ public:
 private:
 
 	std::vector<PlayerData> m_PlayerData;
+	uint32_t m_WinnerAlliance = Core::c_InvalidIndexU;
 
 	mutable Core::IndexVectorU m_TempIndexVector;
 
@@ -49,6 +50,9 @@ public:
 
 	const Core::IndexVectorU& GetLostUnits(uint32_t playerIndex) const;
 	const Core::IndexVectorU& GetLostBuildings(uint32_t playerIndex) const;
+
+	uint32_t GetWinnerAlliance() const;
+	void SetWinnerAlliance(uint32_t winnerAlliance);
 
 	void SerializeSB(Core::ByteVector& bytes) const;
 	void DeserializeSB(const unsigned char*& bytes);

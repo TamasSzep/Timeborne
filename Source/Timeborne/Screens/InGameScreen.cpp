@@ -2,12 +2,15 @@
 
 #include <Timeborne/Screens/InGameScreen.h>
 
+#include <Timeborne/GameCreation/GameCreationData.h>
 #include <Timeborne/GUI/NuklearHelper.h>
 #include <Timeborne/GUI/LoadSaveGUIControl.h>
+#include <Timeborne/InGame/GameState/InGameStatistics.h>
 #include <Timeborne/InGame/InGame.h>
 #include <Timeborne/Misc/ScreenResolution.h>
 #include <Timeborne/MainApplication.h>
 
+constexpr float c_EndDialogHeightRatio = 0.21f;
 constexpr float c_MainDialogHeightRatio = 0.21f;
 
 InGameScreen::InGameScreen()
@@ -32,6 +35,8 @@ void InGameScreen::Reset()
 	m_LoadError.clear();
 	m_SaveTime = {};
 
+	m_InEndDialog = false;
+	m_EndDialogHasBeenShown = false;
 	m_InMainDialog = false;
 	m_WasPausedBeforeMainDialog = false;
 }
@@ -112,6 +117,21 @@ void InGameScreen::SetupLoadGame(const char* saveFileName)
 	m_SaveFileName = (saveFileName != nullptr) ? saveFileName : "";
 }
 
+bool InGameScreen::IsGameEnded() const
+{
+	return m_InGame->IsGameEnded();
+}
+
+const GameCreationData& InGameScreen::GetGameCreationData() const
+{
+	return m_InGame->GetGameCreationData();
+}
+
+const InGameStatistics& InGameScreen::GetStatistics() const
+{
+	return m_InGame->GetStatistics();
+}
+
 void InGameScreen::LoadGameFromSaveFile(const ComponentRenderContext& context, bool clearState)
 {
 	m_LoadError.clear();
@@ -129,6 +149,7 @@ void InGameScreen::LoadGameFromSaveFile(const ComponentRenderContext& context, b
 	if (m_LoadError.empty())
 	{
 		Reset();
+		m_EndDialogHasBeenShown = IsGameEnded(); // If the game was saved ended, the end dialog must have been shown.
 		m_InputFreezeTime = std::chrono::steady_clock::now();
 	}
 	else if (m_LoadSource == LoadSource::SaveFile)
@@ -162,6 +183,8 @@ bool InGameScreen::HandleEvent(const EngineBuildingBlocks::Event* _event)
 
 void InGameScreen::SetInMainDialog(bool inMainDialog)
 {
+	assert(!inMainDialog || !m_InEndDialog);
+
 	m_InMainDialog = inMainDialog;
 
 	if (!m_InGame->IsMultiplayerGame())
@@ -195,7 +218,13 @@ void InGameScreen::PreUpdate(const ComponentPreUpdateContext& context)
 	{
 		m_InGame->PreUpdate(context);
 
-		if (m_InGame->IsGameEnded()) m_NextScreen = ApplicationScreens::GameEnd;
+		if (IsGameEnded() && !m_InEndDialog && !m_EndDialogHasBeenShown)
+		{
+			assert(!m_InMainDialog && !m_InGame->IsPaused());
+			m_InEndDialog = true;
+			m_InGame->TriggerPauseSwitch();
+			m_InGame->SetControlsActive(false);
+		}
 	}
 
 	HandleLoadError();
@@ -226,13 +255,20 @@ void InGameScreen::RenderGUI(const ComponentRenderContext& context)
 
 	m_InGame->RenderGUI(context);
 
-	CreateMainDialogGUI(context);
+	assert(!m_InEndDialog || !m_InMainDialog);
+
+	if (m_InEndDialog)
+	{
+		CreateEndDialog(context);
+	}
+	else if (m_InMainDialog)
+	{
+		CreateMainDialogGUI(context);
+	}
 }
 
 void InGameScreen::CreateMainDialogGUI(const ComponentRenderContext& context)
 {
-	if (!m_InMainDialog) return;
-
 	assert(m_Application->GetPathHandler() != nullptr);
 
 	auto ctx = (nk_context*)context.NuklearContext;
@@ -356,4 +392,44 @@ void InGameScreen::SaveGame()
 	m_InGame->SaveGame(m_SaveGameGUIControl->GetFileName().c_str(), *m_Application->GetPathHandler());
 
 	m_SaveTime = std::chrono::steady_clock::now();
+}
+
+void InGameScreen::CreateEndDialog(const ComponentRenderContext& context)
+{
+	auto ctx = (nk_context*)context.NuklearContext;
+
+	auto mwStart = RatioToPixels(glm::vec2(0.4f, 0.4f), context.WindowSize);
+	auto mwSize = RatioToPixels(glm::vec2(0.2f, c_EndDialogHeightRatio), context.WindowSize);
+
+	if (Nuklear_BeginWindow(ctx, "Game ended", glm::vec2(mwStart.x, mwStart.y), glm::vec2(mwSize.x, mwSize.y)))
+	{
+		const auto& gameCreationData = GetGameCreationData();
+		uint32_t ownAlliance = gameCreationData.Players[gameCreationData.LocalPlayerIndex].AllianceIndex;
+		uint32_t winnerAlliance = GetStatistics().GetWinnerAlliance();
+		assert(winnerAlliance != Core::c_InvalidIndexU);
+		auto mainText = (winnerAlliance == ownAlliance) ? "Victory!" : "Defeat!";
+
+		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 1); // Empty row.
+		
+		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 1);
+		nk_label(ctx, mainText, NK_TEXT_CENTERED);
+
+		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 1); // Empty row.
+		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 1); // Empty row.
+
+		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 2);
+		if (nk_button_label(ctx, "Continue game"))
+		{
+			assert(m_InGame->IsPaused());
+			m_InEndDialog = false;
+			m_EndDialogHasBeenShown = true;
+			m_InGame->TriggerPauseSwitch();
+			m_InGame->SetControlsActive(true);
+		}
+		if (nk_button_label(ctx, "End game"))
+		{
+			m_NextScreen = ApplicationScreens::GameEnd;
+		}
+	}
+	nk_end(ctx);
 }

@@ -11,6 +11,7 @@
 class ServerGameState
 {
 	uint32_t m_TickCount = 0;
+	bool m_GameEnded = false;
 
 	GameObjectList m_GameObjects;
 	GameObjectRouteList m_Routes;
@@ -20,6 +21,9 @@ public:
 
 	uint32_t GetTickCount() const;
 	void IncreaseTickCount();
+
+	bool IsGameEnded() const;
+	void SetGameEnded(bool gameEnded);
 
 	const GameObjectList& GetGameObjects() const;
 	GameObjectList& GetGameObjects();

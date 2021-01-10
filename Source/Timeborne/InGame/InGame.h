@@ -65,10 +65,8 @@ public:
 
 	bool IsMultiplayerGame() const;
 	bool IsPaused() const;
-	bool IsGameEnded() const;
 	void TriggerPauseSwitch();
 	void SetControlsActive(bool active);
-	const InGameStatistics& GetStatistics() const;
 
 private:
 
@@ -130,4 +128,14 @@ private: // Game update.
 	void DoGameUpdate();
 	void DirectUpdate(double dt);
 	void Tick();
+
+private: // Game result.
+
+	void CheckGameEnded();
+
+public:
+
+	bool IsGameEnded() const;
+	const GameCreationData& GetGameCreationData() const;
+	const InGameStatistics& GetStatistics() const;
 };
