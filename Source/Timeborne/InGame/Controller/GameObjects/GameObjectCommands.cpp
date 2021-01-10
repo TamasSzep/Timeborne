@@ -83,7 +83,7 @@ bool GameObjectCommands::HandleEvent(const EngineBuildingBlocks::Event* _event)
 
 void GameObjectCommands::SetSourceObjects()
 {
-	auto& sourceObjectIds = m_LocalGameState.ControllerGameState.SourceGameObjectIds;
+	auto& sourceObjectIds = m_LocalGameState.GetControllerGameState().SourceGameObjectIds;
 
 	if (m_NewObjectIds != sourceObjectIds)
 	{
@@ -94,13 +94,14 @@ void GameObjectCommands::SetSourceObjects()
 void GameObjectCommands::SetLastCommand()
 {
 	auto commandId = m_CommandList.GetLastCommand().CommandId;
-	m_LocalGameState.ControllerGameState.LastCommandId = commandId;
-	m_LocalGameState.ControllerGameState.LastGameObjectCommand = m_CommandList.GetGameObjectCommand(commandId);
+	auto& controllerGameState = m_LocalGameState.GetControllerGameState();
+	controllerGameState.LastCommandId = commandId;
+	controllerGameState.LastGameObjectCommand = m_CommandList.GetGameObjectCommand(commandId);
 }
 
 void GameObjectCommands::PreUpdate(const ComponentPreUpdateContext& context)
 {
-	auto& sourceObjectIds = m_LocalGameState.ControllerGameState.SourceGameObjectIds;
+	const auto& sourceObjectIds = m_LocalGameState.GetControllerGameState().SourceGameObjectIds;
 
 	unsigned countInputs = m_Inputs.GetSize();
 	for (unsigned i = 0; i < countInputs; i++)
@@ -228,7 +229,7 @@ void GameObjectCommands::SelectMultiple(const glm::vec3& endRayOrigin, const glm
 
 bool GameObjectCommands::IsSourceControllable() const
 {
-	const auto& sourceObjectIds = m_LocalGameState.ControllerGameState.SourceGameObjectIds;
+	const auto& sourceObjectIds = m_LocalGameState.GetControllerGameState().SourceGameObjectIds;
 
 	if (sourceObjectIds.IsEmpty()) return false;
 
@@ -252,7 +253,7 @@ bool GameObjectCommands::IsSourceControllable() const
 
 void GameObjectCommands::OnGameObjectRemoved(GameObjectId objectId)
 {
-	m_LocalGameState.ControllerGameState.SourceGameObjectIds.RemoveFirst(objectId);
+	m_LocalGameState.GetControllerGameState().SourceGameObjectIds.RemoveFirst(objectId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

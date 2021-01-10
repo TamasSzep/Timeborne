@@ -98,9 +98,10 @@ public:
 
 enum class ApplicationScreens
 {
-	MainMenu = 0,
+	MainMenu,
 	SinglePlayer,
 	InGame,
+	GameEnd,
 	LevelEditor
 };
 

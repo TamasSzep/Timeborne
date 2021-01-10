@@ -1,4 +1,4 @@
-// Timeborne/InGame/Model/PlayerData.h
+// Timeborne/InGame/Model/GameCreationPlayerData.h
 
 #pragma once
 
@@ -7,14 +7,17 @@
 #include <Core/Constants.h>
 
 #include <cstdint>
+#include <string>
+#include <vector>
 
 enum class PlayerType
 {
 	Computer, User
 };
 
-struct PlayerData
+struct GameCreationPlayerData
 {
+	std::string Name;
 	PlayerType PlayerType = PlayerType::Computer;
 	uint32_t AllianceIndex = 0;
 	uint32_t LevelEditorIndex = Core::c_InvalidIndexU;
@@ -23,24 +26,24 @@ struct PlayerData
 	void DeserializeSB(const unsigned char*& bytes);
 };
 
-class PlayerDataList
+class GameCreationPlayerDataList
 {
-	Core::SimpleTypeVectorU<PlayerData> m_Players;
+	std::vector<GameCreationPlayerData> m_Players;
 
 public:
 
-	PlayerDataList();
-	~PlayerDataList();
+	GameCreationPlayerDataList();
+	~GameCreationPlayerDataList();
 
-	const PlayerData& operator[](uint32_t index) const;
+	const GameCreationPlayerData& operator[](uint32_t index) const;
 	
 	uint32_t GetCountPlayers() const;
 	bool IsMultiplayerGame() const;
 	bool AreAllied(uint32_t playerIndex1, uint32_t playerIndex2) const;
 
 	uint32_t AddPlayer();
-	void RemovePlayer(uint32_t playerIndex);
 	
+	void SetPlayerName(uint32_t playerIndex, const char* name);
 	void SetPlayerType(uint32_t playerIndex, PlayerType playerType);
 	void SetAllianceIndex(uint32_t playerIndex, uint32_t allianceIndex);
 	void SetLevelEditorIndex(uint32_t playerIndex, uint32_t levelEditorIndex);

@@ -15,7 +15,7 @@ class CommandList;
 struct ComponentPreUpdateContext;
 struct GameCreationData;
 class Level;
-struct LocalGameState;
+class LocalGameState;
 class MainApplication;
 class ServerGameState;
 

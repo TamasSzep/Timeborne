@@ -23,7 +23,7 @@
     <ClCompile Include="..\..\Source\Timeborne\CommandLine.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Console.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\GameCreation\GameCreationData.cpp" />
-    <ClCompile Include="..\..\Source\Timeborne\GameCreation\PlayerData.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\GameCreationPlayerData.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\GUI\NuklearGUI.c" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\Controller\CommandList.cpp" />
@@ -34,6 +34,7 @@
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\InGame\InGame.cpp" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Screens\GameEndScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\InGameScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\MainMenuScreen.cpp" />
@@ -107,7 +109,7 @@
     <ClInclude Include="..\..\Source\Timeborne\Declarations\DirectX11RenderDeclarations.h" />
     <ClInclude Include="..\..\Source\Timeborne\Declarations\EngineBuildingBlocksDeclarations.h" />
     <ClInclude Include="..\..\Source\Timeborne\GameCreation\GameCreationData.h" />
-    <ClInclude Include="..\..\Source\Timeborne\GameCreation\PlayerData.h" />
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\GameCreationPlayerData.h" />
     <ClInclude Include="..\..\Source\Timeborne\GUI\GUIConstants.h" />
     <ClInclude Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.h" />
     <ClInclude Include="..\..\Source\Timeborne\GUI\NuklearD3D11Include.h" />
@@ -123,6 +125,7 @@
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCamera.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameCamera\GameCameraState.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ClientGameState.h" />
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\LocalGameState.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\ServerGameState.h" />
     <ClInclude Include="..\..\Source\Timeborne\InGame\InGame.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainWall.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Screens\GameEndScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\InGameScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\MainMenuScreen.h" />

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <Timeborne/GameCreation/PlayerData.h>
+#include <Timeborne/GameCreation/GameCreationPlayerData.h>
 
 #include <Core/DataStructures/SimpleTypeVector.hpp>
 #include <Core/Constants.h>
@@ -12,7 +12,7 @@
 
 struct GameCreationData
 {
-	PlayerDataList Players;
+	GameCreationPlayerDataList Players;
 	uint32_t LocalPlayerIndex = Core::c_InvalidIndexU;
 	std::string LevelName;
 

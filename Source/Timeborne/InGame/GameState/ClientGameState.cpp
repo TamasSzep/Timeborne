@@ -4,6 +4,15 @@
 
 #include <Core/SimpleBinarySerialization.hpp>
 
+ClientGameState::ClientGameState()
+	: m_LocalGameState(m_ClientModelGameState)
+{
+}
+
+ClientGameState::~ClientGameState()
+{
+}
+
 const GameCreationData& ClientGameState::GetGameCreationData() const
 {
 	return m_GameCreationData;
@@ -12,6 +21,7 @@ const GameCreationData& ClientGameState::GetGameCreationData() const
 void ClientGameState::SetGameCreationData(const GameCreationData& data)
 {
 	m_GameCreationData = data;
+	m_LocalGameState.SetGameCreationData(data);
 }
 
 LocalGameState& ClientGameState::GetLocalGameState()

@@ -46,5 +46,8 @@ public: // GameObjectPoseListener IF.
 
 public: // GameObjectFightListener IF.
 
-	void OnGameObjectFightStateChanged(const GameObject& object, const GameObjectFightData& fightData) override;
+	void OnGameObjectDestroyed(const GameObject& sourceObject,
+		const GameObject& targetObject) override {}
+	void OnGameObjectFightStateChanged(const GameObject& object,
+		const GameObjectFightData& fightData) override;
 };

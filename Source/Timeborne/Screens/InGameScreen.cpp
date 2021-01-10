@@ -194,6 +194,8 @@ void InGameScreen::PreUpdate(const ComponentPreUpdateContext& context)
 	if (!m_HasExternalLoadError)
 	{
 		m_InGame->PreUpdate(context);
+
+		if (m_InGame->IsGameEnded()) m_NextScreen = ApplicationScreens::GameEnd;
 	}
 
 	HandleLoadError();
@@ -260,7 +262,7 @@ void InGameScreen::CreateMainDialogGUI(const ComponentRenderContext& context)
 		}
 
 		nk_layout_row_dynamic(ctx, c_ButtonSize.y, 1);
-		if (nk_button_label(ctx, "Exit")) m_NextScreen = ApplicationScreens::MainMenu;
+		if (nk_button_label(ctx, "End game")) m_NextScreen = ApplicationScreens::GameEnd;
 
 		CreateGameSavedLabel(context);
 	}

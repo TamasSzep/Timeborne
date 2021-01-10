@@ -33,6 +33,9 @@ class ClientGameState
 
 public:
 
+	ClientGameState();
+	~ClientGameState();
+
 	const GameCreationData& GetGameCreationData() const;
 	void SetGameCreationData(const GameCreationData& data);
 

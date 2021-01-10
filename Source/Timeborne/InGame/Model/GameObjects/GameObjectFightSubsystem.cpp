@@ -209,6 +209,7 @@ void GameObjectFightSubsystem::Tick(const TickContext& context)
 						if (hpAfter == 0)
 						{
 							changeAttackState(AttackState::None);
+							gameObjectList.NotifyGameObjectDestroyed(sourceObject, targetObject);
 							gameObjectList.Remove(attackTarget);
 							break;
 						}

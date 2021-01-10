@@ -12,7 +12,7 @@ struct ComponentPostUpdateContext;
 struct ComponentRenderContext;
 struct GameCreationData;
 class Level;
-struct LocalGameState;
+class LocalGameState;
 class ServerGameState;
 
 class InGameViewComponent
@@ -28,7 +28,7 @@ protected: // Loaded data.
 	const Level* m_Level = nullptr;
 	const GameCreationData* m_GameCreationData = nullptr;
 	ServerGameState* m_GameState = nullptr;
-	LocalGameState* m_LocalGameState = nullptr;
+	const LocalGameState* m_LocalGameState = nullptr;
 
 public:
 
@@ -45,7 +45,7 @@ public:
 
 	void Load(EngineBuildingBlocks::Graphics::Camera& camera,
 		const Level& level, const GameCreationData& gameCreationData,
-		ServerGameState& gameState, LocalGameState& localGameState,
+		ServerGameState& gameState, const LocalGameState& localGameState,
 		const ComponentRenderContext& context)
 	{
 		m_Camera = &camera;

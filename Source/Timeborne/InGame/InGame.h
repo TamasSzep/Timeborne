@@ -19,6 +19,7 @@ class GameCamera;
 struct GameCreationData;
 class InGameController;
 class InGameModel;
+class InGameStatistics;
 class InGameView;
 class Level;
 
@@ -64,8 +65,10 @@ public:
 
 	bool IsMultiplayerGame() const;
 	bool IsPaused() const;
+	bool IsGameEnded() const;
 	void TriggerPauseSwitch();
 	void SetControlsActive(bool active);
+	const InGameStatistics& GetStatistics() const;
 
 private:
 

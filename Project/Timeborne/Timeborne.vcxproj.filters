@@ -311,9 +311,6 @@
     <ClCompile Include="..\..\Source\Timeborne\GUI\LoadSaveGUIControl.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Timeborne\GameCreation\PlayerData.cpp">
-      <Filter>Source Files\GameCreation</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\InGame\Model\GameObjects\Prototype\GameObjectMovementPrototype.cpp">
       <Filter>Source Files\InGame\Model\GameObjects\Prototype</Filter>
     </ClCompile>
@@ -346,6 +343,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.cpp">
       <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\GameEndScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\GameCreation\GameCreationPlayerData.cpp">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.cpp">
+      <Filter>Source Files\InGame\GameState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -598,9 +604,6 @@
     <ClInclude Include="..\..\Source\Timeborne\InGame\Model\GameObjects\GameObjectTypeIndex.h">
       <Filter>Source Files\InGame\Model\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Timeborne\GameCreation\PlayerData.h">
-      <Filter>Source Files\GameCreation</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\Render\PlayerColors.h">
       <Filter>Source Files\Render</Filter>
     </ClInclude>
@@ -645,6 +648,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.h">
       <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\GameEndScreen.h">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\GameCreation\GameCreationPlayerData.h">
+      <Filter>Source Files\GameCreation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.h">
+      <Filter>Source Files\InGame\GameState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

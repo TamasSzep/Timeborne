@@ -42,6 +42,32 @@ bool InGame::IsPaused() const
 	return m_Paused;
 }
 
+bool InGame::IsGameEnded() const
+{
+	// @todo: we will be able to use player data.
+	
+	// The game is ended if there is only zero or one alliance with game objects.
+	assert(m_ClientGameState != nullptr);
+	uint32_t allianceIndex = Core::c_InvalidIndexU;
+	const auto& gcPlayerData = m_ClientGameState->GetGameCreationData().Players;
+	for (auto& gameObjectData : m_ClientGameState->GetClientModelGameState().GetGameObjects().Get())
+	{
+		auto playerIndex = gameObjectData.second.Data.PlayerIndex;
+		if (playerIndex == Core::c_InvalidIndexU) continue;
+
+		auto cAllianceIndex = gcPlayerData[playerIndex].AllianceIndex;
+		if (allianceIndex == Core::c_InvalidIndexU)
+		{
+			allianceIndex = cAllianceIndex;
+		}
+		else if (cAllianceIndex != allianceIndex)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void InGame::TriggerPauseSwitch()
 {
 	// Not setting 'm_Paused' directly, generating the input to set it in order to reuse the same pausing mechanism.
@@ -52,6 +78,12 @@ void InGame::TriggerPauseSwitch()
 void InGame::SetControlsActive(bool active)
 {
 	m_Camera->SetActive(active);
+}
+
+const InGameStatistics& InGame::GetStatistics() const
+{
+	assert(m_ClientGameState != nullptr);
+	return m_ClientGameState->GetLocalGameState().GetStatistics();
 }
 
 void InGame::Reset()
@@ -96,7 +128,7 @@ void InGame::CreateCamera(const ComponentRenderContext& context, bool isLoadingF
 	auto mouseHandler = application->GetMouseHandler();
 
 	m_CameraSceneNodeHandler = std::make_unique<EngineBuildingBlocks::SceneNodeHandler>();
-	m_Camera = std::make_unique<GameCamera>(m_ClientGameState->GetLocalGameState().GameCameraState,
+	m_Camera = std::make_unique<GameCamera>(m_ClientGameState->GetLocalGameState().GetGameCameraState(),
 		m_CameraSceneNodeHandler.get(), eventManager,
 		keyHandler, mouseHandler, context.ContentSize, isLoadingFromSaveFile);
 }

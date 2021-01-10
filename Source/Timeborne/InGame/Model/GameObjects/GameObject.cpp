@@ -115,6 +115,14 @@ void GameObjectList::SetPose(GameObjectId id, const GameObjectPose& pose)
 	}
 }
 
+void GameObjectList::NotifyGameObjectDestroyed(const GameObject& source, const GameObject& target)
+{
+	for (auto listener : m_FightListeners)
+	{
+		listener->OnGameObjectDestroyed(source, target);
+	}
+}
+
 void GameObjectList::NotifyFightStateChanged(const GameObject& object, const GameObjectFightData& fightData)
 {
 	for (auto listener : m_FightListeners)

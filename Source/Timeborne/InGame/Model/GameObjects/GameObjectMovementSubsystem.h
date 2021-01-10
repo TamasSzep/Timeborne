@@ -50,7 +50,7 @@ public: // GameObjectSubsystem IF.
 
 	void Tick(const TickContext& context) override;
 
-public: // GameObjectListener IF.
+public: // GameObjectExistenceListener IF.
 
 	void OnGameObjectAdded(const GameObject& object) override;
 	void OnGameObjectRemoved(GameObjectId objectId) override;

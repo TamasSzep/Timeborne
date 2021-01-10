@@ -76,6 +76,7 @@ class GameObjectFightListener
 {
 public:
 	virtual ~GameObjectFightListener() {}
+	virtual void OnGameObjectDestroyed(const GameObject& sourceObject, const GameObject& targetObject) = 0;
 	virtual void OnGameObjectFightStateChanged(const GameObject& object, const GameObjectFightData& fightData) = 0;
 };
 
@@ -99,6 +100,7 @@ public:
 
 	void SetPose(GameObjectId id, const GameObjectPose& pose);
 	
+	void NotifyGameObjectDestroyed(const GameObject& source, const GameObject& target);
 	void NotifyFightStateChanged(const GameObject& object, const GameObjectFightData& fightData);
 
 	const GameObjectMap& Get() const;

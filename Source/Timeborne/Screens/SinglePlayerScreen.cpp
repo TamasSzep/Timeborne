@@ -180,7 +180,7 @@ void SinglePlayerScreen::CreateNewGameGUI(const ComponentRenderContext& context)
 		nk_label(ctx, "", NK_LEFT);
 
 		nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 3);
-		nk_label(ctx, "Player type", NK_TEXT_LEFT);
+		nk_label(ctx, "Name", NK_TEXT_LEFT);
 		nk_label(ctx, "Color", NK_TEXT_LEFT);
 		nk_label(ctx, "Team", NK_TEXT_LEFT);
 		
@@ -191,7 +191,7 @@ void SinglePlayerScreen::CreateNewGameGUI(const ComponentRenderContext& context)
 
 			nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 3);
 
-			nk_label(ctx, playerData.PlayerType == PlayerType::User ? "User" : "Computer", NK_LEFT);
+			nk_label(ctx, playerData.Name.c_str(), NK_LEFT);
 			
 			auto levelEditorIndex = playerData.LevelEditorIndex;
 			assert(levelEditorIndex == Core::c_InvalidIndexU || levelEditorIndex < c_CountPlayerColors);
@@ -284,14 +284,22 @@ void SinglePlayerScreen::SetupNewGameData(const std::string& levelName)
 		}
 	}
 
+	char buffer[16];
 	for (auto levelEditorIndex : m_LevelEditorIndices)
 	{
 		uint32_t playerIndex = m_NewGameData.Players.AddPlayer();
 		assert(levelEditorIndex < c_CountPlayerColors);
 		m_NewGameData.Players.SetLevelEditorIndex(playerIndex, levelEditorIndex);
+
+		if (playerIndex > 0)
+		{
+			sprintf_s(buffer, "Computer %d", playerIndex);
+			m_NewGameData.Players.SetPlayerName(playerIndex, buffer);
+		}
 	}
 
-	m_NewGameData.Players.SetPlayerType(m_NewGameData.LocalPlayerIndex, PlayerType::User);
+	m_NewGameData.Players.SetPlayerName(0, "User");
+	m_NewGameData.Players.SetPlayerType(0, PlayerType::User);
 	m_NewGameData.Players.SetFreeForAll(c_MaxCountAlliances);
 }
 

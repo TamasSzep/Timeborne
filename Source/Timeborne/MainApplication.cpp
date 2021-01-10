@@ -10,6 +10,7 @@
 
 #include <Timeborne/GUI/NuklearGUI.h>
 #include <Timeborne/Misc/UserConfiguration.h>
+#include <Timeborne/Screens/GameEndScreen.h>
 #include <Timeborne/Screens/InGameScreen.h>
 #include <Timeborne/Screens/LevelEditorScreen.h>
 #include <Timeborne/Screens/MainMenuScreen.h>
@@ -52,6 +53,7 @@ void MainApplication::InitializeComponents()
 	m_Screens.push_back(std::make_unique<MainMenuScreen>());
 	m_Screens.push_back(std::make_unique<SinglePlayerScreen>());
 	m_Screens.push_back(std::make_unique<InGameScreen>());
+	m_Screens.push_back(std::make_unique<GameEndScreen>());
 	m_Screens.push_back(std::make_unique<LevelEditorScreen>());
 	for (auto& screen : m_Screens)
 	{

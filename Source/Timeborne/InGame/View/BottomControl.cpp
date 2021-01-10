@@ -41,10 +41,12 @@ void BottomControl::UpdateSourceGameObjects()
 {
 	assert(m_LocalGameState != nullptr && m_FightMap != nullptr);
 
+	const auto& stateSourceGameObjectIds = m_LocalGameState->GetControllerGameState().SourceGameObjectIds;
+
 	bool updateRequired = false;
-	if (m_SourceGameObjectIds != m_LocalGameState->ControllerGameState.SourceGameObjectIds)
+	if (m_SourceGameObjectIds != stateSourceGameObjectIds)
 	{
-		m_SourceGameObjectIds = m_LocalGameState->ControllerGameState.SourceGameObjectIds;
+		m_SourceGameObjectIds = stateSourceGameObjectIds;
 		updateRequired = true;	
 	}
 	else
@@ -120,10 +122,11 @@ void BottomControl::UpdateFightMap()
 void BottomControl::UpdateLastCommand()
 {
 	assert(m_LocalGameState != nullptr);
+	auto stateLastCommandId = m_LocalGameState->GetControllerGameState().LastCommandId;
 
-	if (m_LastCommandId != m_LocalGameState->ControllerGameState.LastCommandId)
+	if (m_LastCommandId != stateLastCommandId)
 	{
-		m_LastCommandId = m_LocalGameState->ControllerGameState.LastCommandId;
+		m_LastCommandId = stateLastCommandId;
 		UpdateLastCommandString();
 	}
 }
@@ -169,7 +172,7 @@ void BottomControl::UpdateLastCommandString()
 	m_Stream << "Last command: { ";
 	if (m_LastCommandId != Core::c_InvalidIndexU)
 	{
-		auto& command = m_LocalGameState->ControllerGameState.LastGameObjectCommand;
+		const auto& command = m_LocalGameState->GetControllerGameState().LastGameObjectCommand;
 		const char* typeNames[] = { "ObjectToObject", "ObjectToTerrain" };
 		m_Stream << "Type: " << typeNames[(int)command.Type] << ", Source objects: [";
 		unsigned countSources = command.SourceIds.GetSize();

@@ -5,8 +5,22 @@
 #include <Timeborne/GUI/GUIConstants.h>
 #include <Timeborne/GUI/NuklearInclude.h>
 
+#include <EngineBuildingBlocks/Math/GLM.h>
+
 #include <functional>
 #include <vector>
+
+inline nk_color ToNKColor(const glm::vec4& color)
+{
+	return nk_rgba_fv(glm::value_ptr(color));
+}
+
+inline glm::vec4 ToFColor(nk_color color)
+{
+	glm::vec4 res(glm::uninitialize);
+	nk_color_fv(glm::value_ptr(res), color);
+	return res;
+}
 
 template <typename TEnum>
 void Nuklear_CreateTabs(nk_context* ctx, TEnum* pIndex, const std::initializer_list<const char*>& enumNames, float height, int rowSize = -1)

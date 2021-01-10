@@ -6,11 +6,6 @@
 #include <Timeborne/Misc/ScreenResolution.h>
 #include <Timeborne/MainApplication.h>
 
-inline nk_color ToNKColor(const glm::vec4& color) { return nk_rgba_fv(glm::value_ptr(color)); }
-inline glm::vec4 ToFColor(nk_color color) { glm::vec4 res(glm::uninitialize); nk_color_fv(glm::value_ptr(res), color); return res; }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 MainMenuScreen::MainMenuScreen()
 {
 	Reset();

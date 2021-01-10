@@ -1,21 +1,19 @@
-// Timeborne/Screens/MainMenuScreen.h
+// Timeborne/Screens/GameEndScreen.h
 
 #pragma once
 
 #include <Timeborne/ApplicationComponent.h>
 
-class MainMenuScreen : public ApplicationScreen
+class GameEndScreen : public ApplicationScreen
 {
-	bool m_IsExiting = false;
-
 protected:
 
 	void DerivedInitializeMain(const ComponentInitContext& context);
 
 public:
 
-	MainMenuScreen();
-	~MainMenuScreen() override;
+	GameEndScreen();
+	~GameEndScreen() override;
 
 	void InitializeRendering(const ComponentRenderContext& context) override;
 	void DestroyMain() override;

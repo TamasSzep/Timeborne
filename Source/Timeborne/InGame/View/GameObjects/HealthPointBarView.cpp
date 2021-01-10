@@ -58,10 +58,11 @@ void HealthPointBarView::RenderContent(const ComponentRenderContext& context)
 void HealthPointBarView::UpdateSourceGameObjects()
 {
 	assert(m_LocalGameState != nullptr);
+	const auto& stateSourceGameObjectIds = m_LocalGameState->GetControllerGameState().SourceGameObjectIds;
 
-	if (m_SourceGameObjectIds != m_LocalGameState->ControllerGameState.SourceGameObjectIds)
+	if (m_SourceGameObjectIds != stateSourceGameObjectIds)
 	{
-		m_SourceGameObjectIds = m_LocalGameState->ControllerGameState.SourceGameObjectIds;
+		m_SourceGameObjectIds = stateSourceGameObjectIds;
 	}
 }
 
