@@ -16,6 +16,8 @@ struct GameCreationData
 	uint32_t LocalPlayerIndex = Core::c_InvalidIndexU;
 	std::string LevelName;
 
+	const GameCreationPlayerData& GetOwnPlayerData() const;
+
 	void SerializeSB(Core::ByteVector& bytes) const;
 	void DeserializeSB(const unsigned char*& bytes);
 };

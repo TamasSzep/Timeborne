@@ -150,15 +150,6 @@ void SinglePlayerScreen::RenderGUI(const ComponentRenderContext& context)
 	nk_end(ctx);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-InGameScreen* GetInGameScreen(MainApplication* application)
-{
-	return dynamic_cast<InGameScreen*>(application->GetScreen(ApplicationScreens::InGame));
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void SinglePlayerScreen::CreateNewGameGUI(const ComponentRenderContext& context)
 {
 	auto ctx = (nk_context*)context.NuklearContext;
@@ -199,12 +190,7 @@ void SinglePlayerScreen::CreateNewGameGUI(const ComponentRenderContext& context)
 			auto playerColor = (levelEditorIndex != Core::c_InvalidIndexU)
 				? c_PlayerColors[levelEditorIndex]
 				: glm::vec3(0.5f, 0.5f, 0.5f);
-			nk_color color = {
-				(nk_byte)(playerColor.r * 255.0f),
-				(nk_byte)(playerColor.g * 255.0f),
-				(nk_byte)(playerColor.b * 255.0f),
-				255
-			};
+			nk_color color = ToNKColor(glm::vec4(playerColor, 1.0f));
 			if (nk_combo_begin_color(ctx, color, { (float)c_ComboBoxWidth, (float)c_ComboBoxHeight }))
 			{
 				int selectedColorIndex = -1;
@@ -250,7 +236,7 @@ void SinglePlayerScreen::LoadNewLevel()
 {
 	assert(m_Application->GetPathHandler() != nullptr);
 
-	auto inGameScreen = GetInGameScreen(m_Application);
+	auto inGameScreen = GetScreen<InGameScreen>(ApplicationScreens::InGame, m_Application);
 	auto levelName = m_LevelFilePath->GetText();
 
 	if (inGameScreen->HasLevel(levelName.c_str()))
@@ -319,7 +305,7 @@ void SinglePlayerScreen::SetPlayerLevelEditorIndex(uint32_t playerIndex, uint32_
 
 void SinglePlayerScreen::CreateGame()
 {
-	auto inGameScreen = GetInGameScreen(m_Application);
+	auto inGameScreen = GetScreen<InGameScreen>(ApplicationScreens::InGame, m_Application);
 	auto levelName = m_LevelFilePath->GetText();
 
 	if (!inGameScreen->HasLevel(levelName.c_str()))
@@ -355,7 +341,7 @@ void SinglePlayerScreen::CreateLoadGameGUI(const ComponentRenderContext& context
 
 void SinglePlayerScreen::LoadSavedGame()
 {
-	auto inGameScreen = GetInGameScreen(m_Application);
+	auto inGameScreen = GetScreen<InGameScreen>(ApplicationScreens::InGame, m_Application);
 	auto saveGameFile = m_LoadGameGUIControl->GetFileName();
 
 	if (inGameScreen->IsSaveFileValid(saveGameFile))

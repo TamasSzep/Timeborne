@@ -403,8 +403,7 @@ void InGameScreen::CreateEndDialog(const ComponentRenderContext& context)
 
 	if (Nuklear_BeginWindow(ctx, "Game ended", glm::vec2(mwStart.x, mwStart.y), glm::vec2(mwSize.x, mwSize.y)))
 	{
-		const auto& gameCreationData = GetGameCreationData();
-		uint32_t ownAlliance = gameCreationData.Players[gameCreationData.LocalPlayerIndex].AllianceIndex;
+		uint32_t ownAlliance = GetGameCreationData().GetOwnPlayerData().AllianceIndex;
 		uint32_t winnerAlliance = GetStatistics().GetWinnerAlliance();
 		assert(winnerAlliance != Core::c_InvalidIndexU);
 		auto mainText = (winnerAlliance == ownAlliance) ? "Victory!" : "Defeat!";

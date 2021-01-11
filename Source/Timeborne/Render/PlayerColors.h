@@ -6,7 +6,7 @@
 
 #include <cstdint>
 
-glm::vec3 c_PlayerColors[] =
+static glm::vec3 c_PlayerColors[] =
 {
 	glm::vec3(0.0f, 162.0f, 232.0f) / 255.0f,
 	glm::vec3(237.0f, 28.0f, 36.0f) / 255.0f,

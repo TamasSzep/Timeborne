@@ -4,6 +4,11 @@
 
 #include <Core/SimpleBinarySerialization.hpp>
 
+const GameCreationPlayerData& GameCreationData::GetOwnPlayerData() const
+{
+	return Players[LocalPlayerIndex];
+}
+
 void GameCreationData::SerializeSB(Core::ByteVector& bytes) const
 {
 	Core::SerializeSB(bytes, Players);

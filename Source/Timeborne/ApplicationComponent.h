@@ -9,6 +9,8 @@
 #include <EngineBuildingBlocks/Application/PostUpdateContext.h>
 #include <EngineBuildingBlocks/Math/GLM.h>
 
+#include <cassert>
+
 class MainApplication;
 struct Settings;
 
@@ -130,3 +132,12 @@ public:
 	virtual void Enter(const ComponentRenderContext& context) = 0;
 	virtual void Exit() = 0;
 };
+
+template <typename TScreen, typename TApplication>
+inline TScreen* GetScreen(ApplicationScreens screen, TApplication* application)
+{
+	assert(application != nullptr);
+	auto result = dynamic_cast<TScreen*>(application->GetScreen(screen));
+	assert(result != nullptr);
+	return result;
+}

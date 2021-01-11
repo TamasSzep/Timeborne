@@ -51,6 +51,9 @@ public:
 	const Core::IndexVectorU& GetLostUnits(uint32_t playerIndex) const;
 	const Core::IndexVectorU& GetLostBuildings(uint32_t playerIndex) const;
 
+	uint32_t GetLostUnitCount(uint32_t playerIndex) const;
+	uint32_t GetLostBuildingCount(uint32_t playerIndex) const;
+
 	uint32_t GetWinnerAlliance() const;
 	void SetWinnerAlliance(uint32_t winnerAlliance);
 

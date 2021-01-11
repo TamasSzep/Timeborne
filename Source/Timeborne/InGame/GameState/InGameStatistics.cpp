@@ -6,6 +6,8 @@
 #include <Timeborne/InGame/GameState/ServerGameState.h>
 #include <Timeborne/InGame/Model/GameObjects/Prototype/GameObjectPrototype.h>
 
+#include <numeric>
+
 void InGameStatistics::PlayerData::SerializeSB(Core::ByteVector& bytes) const
 {
 	Core::SerializeSB(bytes, ProducedUnits);
@@ -87,6 +89,18 @@ const Core::IndexVectorU& InGameStatistics::GetLostBuildings(uint32_t playerInde
 		m_TempIndexVector[i] = m_PlayerData[i].DestroyedBuildings[playerIndex];
 	}
 	return m_TempIndexVector;
+}
+
+uint32_t InGameStatistics::GetLostUnitCount(uint32_t playerIndex) const
+{
+	const auto& values = GetLostUnits(playerIndex);
+	return std::accumulate(values.GetArray(), values.GetEndPointer(), 0);
+}
+
+uint32_t InGameStatistics::GetLostBuildingCount(uint32_t playerIndex) const
+{
+	const auto& values = GetLostBuildings(playerIndex);
+	return std::accumulate(values.GetArray(), values.GetEndPointer(), 0);
 }
 
 uint32_t InGameStatistics::GetWinnerAlliance() const
