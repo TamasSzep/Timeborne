@@ -2,6 +2,8 @@
 
 #include <Timeborne/Render/Hud/HudRectangleRenderer.h>
 
+#include <Timeborne/ApplicationComponent.h>
+
 #include <DirectX11Render/Managers.h>
 
 using namespace EngineBuildingBlocks;

@@ -7,6 +7,7 @@
 #include <Timeborne/InGame/Model/GameObjects/Prototype/GameObjectFightPrototype.h>
 #include <Timeborne/InGame/Model/GameObjects/Prototype/GameObjectPrototype.h>
 #include <Timeborne/Render/Hud/HudRectangleRenderer.h>
+#include <Timeborne/ApplicationComponent.h>
 
 #include <EngineBuildingBlocks/Graphics/Camera/Camera.h>
 

@@ -111,6 +111,9 @@
     <Filter Include="Source Files\Screens">
       <UniqueIdentifier>{f2958d2a-c8a4-4115-9649-3c1d2c3d5e44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Render\ParticleSystem">
+      <UniqueIdentifier>{2191b9d9-4008-4222-ab6e-9054565b03bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Timeborne\main.cpp">
@@ -352,6 +355,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.cpp">
       <Filter>Source Files\InGame\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.cpp">
+      <Filter>Source Files\Render\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.cpp">
+      <Filter>Source Files\Render\ParticleSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -657,6 +666,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\InGame\GameState\InGameStatistics.h">
       <Filter>Source Files\InGame\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.h">
+      <Filter>Source Files\Render\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.h">
+      <Filter>Source Files\Render\ParticleSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

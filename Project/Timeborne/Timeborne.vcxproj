@@ -89,6 +89,8 @@
     <ClCompile Include="..\..\Source\Timeborne\Misc\UserConfiguration.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Terrain\TerrainField.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="..\..\Source\Timeborne\Misc\UserConfiguration.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\PlayerColors.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\SimpleLineRenderer.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\Terrain\TerrainCommon.h" />

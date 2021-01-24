@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include <Timeborne/ApplicationComponent.h>
-
 #include <Core/DataStructures/SimpleTypeUnorderedVector.hpp>
 #include <EngineBuildingBlocks/Math/GLM.h>
 #include <DirectX11Render/Primitive.h>
 #include <DirectX11Render/Resources/VertexBuffer.h>
+
+struct ComponentRenderContext;
 
 class HudRectangleRenderer
 {
