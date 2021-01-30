@@ -99,6 +99,7 @@
     <ClCompile Include="..\..\Source\Timeborne\Screens\InGameScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\MainMenuScreen.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Screens\OptionsScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Settings.cpp" />
   </ItemGroup>
@@ -204,6 +205,7 @@
     <ClInclude Include="..\..\Source\Timeborne\Screens\InGameScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\MainMenuScreen.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Screens\OptionsScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Settings.h" />
   </ItemGroup>

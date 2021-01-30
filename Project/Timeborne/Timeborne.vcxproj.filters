@@ -362,6 +362,9 @@
     <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.cpp">
       <Filter>Source Files\Render\ParticleSystem</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\OptionsScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Timeborne\MainApplication.h">
@@ -672,6 +675,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystemRenderer.h">
       <Filter>Source Files\Render\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\OptionsScreen.h">
+      <Filter>Source Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

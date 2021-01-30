@@ -104,7 +104,8 @@ enum class ApplicationScreens
 	SinglePlayer,
 	InGame,
 	GameEnd,
-	LevelEditor
+	LevelEditor,
+	Options
 };
 
 class ApplicationScreen : public ApplicationComponent

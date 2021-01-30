@@ -111,7 +111,7 @@ void MainMenuScreen::RenderGUI(const ComponentRenderContext& context)
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
 			if (nk_button_label(ctx, "Single player")) m_NextScreen = ApplicationScreens::SinglePlayer;
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
-			if (nk_button_label(ctx, "Options")) {}
+			if (nk_button_label(ctx, "Options")) m_NextScreen = ApplicationScreens::Options;
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
 			if (nk_button_label(ctx, "Exit")) m_IsExiting = true;
 		}

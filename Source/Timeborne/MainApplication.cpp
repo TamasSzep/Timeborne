@@ -14,6 +14,7 @@
 #include <Timeborne/Screens/InGameScreen.h>
 #include <Timeborne/Screens/LevelEditorScreen.h>
 #include <Timeborne/Screens/MainMenuScreen.h>
+#include <Timeborne/Screens/OptionsScreen.h>
 #include <Timeborne/Screens/SinglePlayerScreen.h>
 
 #include <windows.h>
@@ -55,6 +56,7 @@ void MainApplication::InitializeComponents()
 	m_Screens.push_back(std::make_unique<InGameScreen>());
 	m_Screens.push_back(std::make_unique<GameEndScreen>());
 	m_Screens.push_back(std::make_unique<LevelEditorScreen>());
+	m_Screens.push_back(std::make_unique<OptionsScreen>(m_PathHandler));
 	for (auto& screen : m_Screens)
 	{
 		m_Components.push_back(screen.get());

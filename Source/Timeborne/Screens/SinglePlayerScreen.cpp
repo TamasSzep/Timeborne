@@ -8,7 +8,10 @@
 #include <Timeborne/InGame/Model/Level.h>
 #include <Timeborne/Render/PlayerColors.h>
 #include <Timeborne/Screens/InGameScreen.h>
+#include <Timeborne/Screens/OptionsScreen.h>
 #include <Timeborne/MainApplication.h>
+
+#include <Core/DataStructures/Properties.h>
 
 constexpr uint32_t c_MaxCountAlliances = 8;
 
@@ -123,7 +126,7 @@ void SinglePlayerScreen::RenderGUI(const ComponentRenderContext& context)
 
 	auto mwSize = glm::vec2(context.WindowSize.x, context.WindowSize.y);
 
-	if (Nuklear_BeginWindow(ctx, "Single player", glm::vec2(0.0f, 0.0f), glm::vec2(mwSize.x, mwSize.y)))
+	if (Nuklear_BeginWindow(ctx, "Single player", glm::vec2(0.0f, 0.0f), mwSize))
 	{
 		auto prevSelectedGUITab = mSelectedGUITab;
 		Nuklear_CreateTabs(ctx, &mSelectedGUITab, { "New game", "Load game" }, c_ButtonSize.y, (int)MainTabs::COUNT + 1);
@@ -284,7 +287,9 @@ void SinglePlayerScreen::SetupNewGameData(const std::string& levelName)
 		}
 	}
 
-	m_NewGameData.Players.SetPlayerName(0, "User");
+	const auto& options = GetScreen<OptionsScreen>(ApplicationScreens::Options, m_Application)->GetOptions();
+
+	m_NewGameData.Players.SetPlayerName(0, options.GetPropertyValueStr(c_OptionsPropertyName_PlayerName));
 	m_NewGameData.Players.SetPlayerType(0, PlayerType::User);
 	m_NewGameData.Players.SetFreeForAll(c_MaxCountAlliances);
 }
