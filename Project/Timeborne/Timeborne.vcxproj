@@ -85,6 +85,7 @@
     <ClCompile Include="..\..\Source\Timeborne\Logger.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\main.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\MainApplication.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Misc\LanConnection.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Misc\ScreenResolution.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Misc\UserConfiguration.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="..\..\Source\Timeborne\Screens\InGameScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\MainMenuScreen.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\OptionsScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Settings.cpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="..\..\Source\Timeborne\MainApplication.h" />
     <ClInclude Include="..\..\Source\Timeborne\Math\Math.h" />
     <ClInclude Include="..\..\Source\Timeborne\Math\SqrtExtendedIntegerRing.hpp" />
+    <ClInclude Include="..\..\Source\Timeborne\Misc\LanConnection.h" />
     <ClInclude Include="..\..\Source\Timeborne\Misc\ScreenResolution.h" />
     <ClInclude Include="..\..\Source\Timeborne\Misc\UserConfiguration.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.h" />
@@ -205,6 +208,7 @@
     <ClInclude Include="..\..\Source\Timeborne\Screens\InGameScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\LevelEditorScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\MainMenuScreen.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\OptionsScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Screens\SinglePlayerScreen.h" />
     <ClInclude Include="..\..\Source\Timeborne\Settings.h" />

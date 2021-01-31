@@ -365,6 +365,12 @@
     <ClCompile Include="..\..\Source\Timeborne\Screens\OptionsScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Misc\LanConnection.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Timeborne\MainApplication.h">
@@ -678,6 +684,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Timeborne\Screens\OptionsScreen.h">
       <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.h">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Misc\LanConnection.h">
+      <Filter>Source Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

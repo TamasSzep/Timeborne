@@ -89,7 +89,7 @@ void MainMenuScreen::RenderGUI(const ComponentRenderContext& context)
 	auto ctx = (nk_context*)context.NuklearContext;
 
 	auto mwStart = RatioToPixels(glm::vec2(0.4f, 0.4f), context.WindowSize);
-	auto mwSize = RatioToPixels(glm::vec2(0.2f, 0.2f), context.WindowSize);
+	auto mwSize = RatioToPixels(glm::vec2(0.2f, 0.21f), context.WindowSize);
 
 	constexpr float c_ButtonHeight = 30;
 	constexpr float c_ExitHeight = 150;
@@ -110,6 +110,8 @@ void MainMenuScreen::RenderGUI(const ComponentRenderContext& context)
 			if (nk_button_label(ctx, "Level editor")) m_NextScreen = ApplicationScreens::LevelEditor;
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
 			if (nk_button_label(ctx, "Single player")) m_NextScreen = ApplicationScreens::SinglePlayer;
+			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
+			if (nk_button_label(ctx, "Multiplayer")) m_NextScreen = ApplicationScreens::MultiPlayer;
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);
 			if (nk_button_label(ctx, "Options")) m_NextScreen = ApplicationScreens::Options;
 			nk_layout_row_dynamic(ctx, c_ButtonHeight, 1);

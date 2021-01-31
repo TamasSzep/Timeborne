@@ -101,11 +101,12 @@ public:
 enum class ApplicationScreens
 {
 	MainMenu,
-	SinglePlayer,
-	InGame,
-	GameEnd,
 	LevelEditor,
-	Options
+	SinglePlayer,
+	MultiPlayer,
+	Options,
+	InGame,
+	GameEnd
 };
 
 class ApplicationScreen : public ApplicationComponent
