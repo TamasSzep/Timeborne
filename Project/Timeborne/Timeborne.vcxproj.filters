@@ -114,6 +114,9 @@
     <Filter Include="Source Files\Render\ParticleSystem">
       <UniqueIdentifier>{2191b9d9-4008-4222-ab6e-9054565b03bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Networking">
+      <UniqueIdentifier>{246a96c6-eef9-4b36-a751-05196db9a9e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\Timeborne\main.cpp">
@@ -368,8 +371,17 @@
     <ClCompile Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.cpp">
       <Filter>Source Files\Screens</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Timeborne\Misc\LanConnection.cpp">
-      <Filter>Source Files\Misc</Filter>
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanClient.cpp">
+      <Filter>Source Files\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanConnection.cpp">
+      <Filter>Source Files\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanServer.cpp">
+      <Filter>Source Files\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Timeborne\Networking\NetworkingCommon.cpp">
+      <Filter>Source Files\Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -688,8 +700,20 @@
     <ClInclude Include="..\..\Source\Timeborne\Screens\MultiPlayerScreen.h">
       <Filter>Source Files\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\Timeborne\Misc\LanConnection.h">
-      <Filter>Source Files\Misc</Filter>
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanClient.h">
+      <Filter>Source Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanConnection.h">
+      <Filter>Source Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanServer.h">
+      <Filter>Source Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanCommon.h">
+      <Filter>Source Files\Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Timeborne\Networking\NetworkingCommon.h">
+      <Filter>Source Files\Networking</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@
 #include <Timeborne/ApplicationComponent.h>
 
 #include <Timeborne/GameCreation/GameCreationData.h>
-#include <Timeborne/Misc/LanConnection.h>
+#include <Timeborne/Networking/LanConnection.h>
 
 #include <memory>
 
@@ -60,9 +60,13 @@ private: // GUI.
 
 private: // Host on LAN.
 
+	bool m_IsHostingOnLAN = false;
+
 	void CreateHostOnLANGUI(const ComponentRenderContext& context);
 
 private: // Connect on LAN.
+
+	bool m_IsConnectingOnLAN = false;
 
 	void CreateConnectOnLANGUI(const ComponentRenderContext& context);
 };

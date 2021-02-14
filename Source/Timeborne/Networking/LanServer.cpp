@@ -1,58 +1,16 @@
-// Timeborne/Misc/LanConnection.cpp
+// Timeborne/Networking/LanServer.cpp
 
-#include <Timeborne/Misc/LanConnection.h>
+#include <Timeborne/Networking/LanServer.h>
 
-#include <Timeborne/Logger.h>
+#include <Timeborne/Networking/LanCommon.h>
 
 #include <Core/System/Socket.h>
 #include <Core/System/ThreadPool.h>
-
-#include <cstdint>
-
-constexpr uint32_t c_CountMaxConnections = 8U;
-constexpr uint16_t c_DispatchPort = 0x4154;
-
-uint16_t GetPortForClientIndex(uint32_t clientIndex, bool sendSocket)
-{
-	return (c_DispatchPort + 1) + (clientIndex * 2) + (sendSocket ? 0 : 1);
-}
-
-// Checks whether the target platform has little-endian byte order. Note that the VALUE of endianness does NOT matter,
-// but to keep the serialization simple, no byte swaps were implemented, so the endianness must MATCH between
-// server and client.
-void LanConnection::CheckEndianness()
-{
-	// When compiling with C++20 supported, check simply: std::endian::native == std::endian::little
-	const uint64_t x = 0x0706050403020100;
-	const auto bytes = (const uint8_t*)&x;
-	bool isLittleEndian = true;
-	for (int i = 0; i < 8; i++)
-	{
-		if (bytes[i] != i) { isLittleEndian = false; break; }
-	}
-	if (!isLittleEndian)
-	{
-		Logger::Log("Only CPUs with little-endian byte order are supported.", LogSeverity::Error,
-			LogFlags::AddMessageBox);
-	}
-}
-
-uint32_t GetNext2Power(uint32_t v)
-{
-	v--;
-	v |= v >> 1;
-	v |= v >> 2;
-	v |= v >> 4;
-	v |= v >> 8;
-	v |= v >> 16;
-	v++;
-	return v;
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <Core/Utility.hpp>
 
 // Threads: dispatch (1), send (1), receive (#Clients)
 
+constexpr uint32_t c_CountMaxConnections = 8U;
 constexpr uint32_t c_DispatchThreadIndex = 0;
 constexpr uint32_t c_SendThreadIndex = 1;
 constexpr uint32_t c_ReceiveThreadOffset = 2;
@@ -76,6 +34,9 @@ void LanServer::Reset()
 
 	m_Clients.Clear();
 	m_ClientIdToIndexMap.clear();
+
+	m_DispatchSocket.reset();
+	m_Dispatching = false;
 }
 
 void LanServer::Start()
@@ -86,8 +47,7 @@ void LanServer::Start()
 
 void LanServer::_RunDispatcher()
 {
-	Core::ServerSocket dispatchSocket;
-	dispatchSocket.SetTimeout(100);
+	m_DispatchSocket = std::make_unique<Core::ServerSocket>();
 
 	while (m_Running)
 	{
@@ -100,57 +60,87 @@ void LanServer::_RunDispatcher()
 
 		// 'cannotAddNewClient' might be invalid at this point, but it's okay, because we only decide here
 		// whether a sleep is necessary.
-		if (cannotAddNewClient)
+		if (cannotAddNewClient || m_Dispatching)
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 			continue;
 		}
 
-		dispatchSocket.ClearError();
-		dispatchSocket.Start(c_DispatchPort);
-		if (!dispatchSocket.HasError())
+		m_Dispatching = true;
 		{
-			uint32_t clientIndex;
+			std::lock_guard<std::mutex> lock(m_DispatchSocketMutex);
+
+			m_DispatchSocket->ClearError();
+
+			// @todo: use ASIO directly.
+
+			//m_DispatchSocket->StartAsync(c_DispatchPort,
+			//	std::bind(&LanServer::DispatcherStartCallback, this, std::placeholders::_1));
+
+			// DEBUG!!!
+			m_DispatchSocket->Start(c_DispatchPort);
+			if (m_DispatchSocket->HasError())
 			{
-				std::lock_guard<std::mutex> lock(m_Mutex);
-
-				assert(m_Clients.GetSize() < c_CountMaxConnections);
-
-				clientIndex = m_Clients.Add();
-				assert(clientIndex < c_CountMaxConnections);
-
-				dispatchSocket.Send(&clientIndex, sizeof(uint32_t));
-				if (dispatchSocket.HasError())
-				{
-					m_Clients.Remove(clientIndex);
-					continue;
-				}
-
-				auto& clientData = m_Clients[clientIndex];
-
-				bool result = ConnectSocket(clientIndex, GetPortForClientIndex(clientIndex, true), clientData.SendSocket);
-				if (!result)
-				{
-					m_Clients.Remove(clientIndex);
-					continue;
-				}
-
-				result = ConnectSocket(clientIndex, GetPortForClientIndex(clientIndex, false), clientData.ReceiveSocket);
-				if (!result)
-				{
-					m_Clients.Remove(clientIndex);
-					continue;
-				}
-
-				uint32_t clientId = m_NextClientId++;
-				clientData.ClientId = clientId;
-				m_ClientIdToIndexMap[clientId] = clientIndex;
+				printf("Error in LanServer::_RunDispatcher().\n");
 			}
-
-			m_ThreadPool->GetThread(clientIndex + c_ReceiveThreadOffset).Execute(
-				&LanServer::_Receive, this, clientIndex);
+			else
+			{
+				char buffer[64];
+				m_DispatchSocket->Receive(buffer, 64);
+				printf("Somebody has connected: %s\n", buffer);
+			}
 		}
 	}
+}
+
+void LanServer::DispatcherStartCallback(const std::error_code& errorCode)
+{
+	std::lock_guard<std::mutex> lock(m_DispatchSocketMutex);
+
+	if (!static_cast<bool>(errorCode) && !m_DispatchSocket->HasError())
+	{
+		uint32_t clientIndex;
+		{
+			std::lock_guard<std::mutex> lock(m_Mutex);
+
+			assert(m_Clients.GetSize() < c_CountMaxConnections);
+
+			clientIndex = m_Clients.Add();
+			assert(clientIndex < c_CountMaxConnections);
+
+			m_DispatchSocket->Send(&clientIndex, sizeof(uint32_t));
+			if (m_DispatchSocket->HasError())
+			{
+				m_Clients.Remove(clientIndex);
+				return;
+			}
+
+			auto& clientData = m_Clients[clientIndex];
+
+			bool result = ConnectSocket(clientIndex, GetPortForClientIndex(clientIndex, true), clientData.SendSocket);
+			if (!result)
+			{
+				m_Clients.Remove(clientIndex);
+				return;
+			}
+
+			result = ConnectSocket(clientIndex, GetPortForClientIndex(clientIndex, false), clientData.ReceiveSocket);
+			if (!result)
+			{
+				m_Clients.Remove(clientIndex);
+				return;
+			}
+
+			uint32_t clientId = m_NextClientId++;
+			clientData.ClientId = clientId;
+			m_ClientIdToIndexMap[clientId] = clientIndex;
+		}
+
+		m_ThreadPool->GetThread(clientIndex + c_ReceiveThreadOffset).Execute(
+			&LanServer::_Receive, this, clientIndex);
+	}
+
+	m_Dispatching = false;
 }
 
 bool LanServer::ConnectSocket(uint32_t clientIndex, uint16_t port, std::unique_ptr<Core::ServerSocket>& socket)
@@ -201,7 +191,7 @@ void LanServer::Send(uint32_t clientId, const void* buffer, size_t size)
 			sendBuffer = sendBuffers[sendBufferIndex].get();
 			if (sendBuffer->GetSize() < (uint32_t)size)
 			{
-				sendBuffer->Resize(GetNext2Power((uint32_t)size));
+				sendBuffer->Resize(Core::GetNext2Power((uint32_t)size));
 			}
 
 			clientData.SendTaskIndices.PushBack(sendBufferIndex);
@@ -264,58 +254,4 @@ void LanServer::_Receive(uint32_t clientIndex)
 
 		// @todo: process received data. Probably buffer pointer ping-pong has to be implemented here.
 	}
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-LanClient::LanClient()
-{
-}
-
-LanClient::~LanClient()
-{
-}
-
-void LanClient::ListServers()
-{
-	// @todo
-}
-
-void LanClient::Start()
-{
-	// @todo
-}
-
-void LanClient::Reset()
-{
-	// @todo
-
-	m_ConnectSocket.reset();
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-LanConnection::LanConnection()
-{
-}
-
-LanConnection::~LanConnection()
-{
-	Reset();
-}
-
-void LanConnection::Reset()
-{
-	m_Server.Reset();
-	m_Client.Reset();
-}
-
-LanServer& LanConnection::GetServer()
-{
-	return m_Server;
-}
-
-LanClient& LanConnection::GetClient()
-{
-	return m_Client;
 }

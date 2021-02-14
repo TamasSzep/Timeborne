@@ -85,9 +85,12 @@
     <ClCompile Include="..\..\Source\Timeborne\Logger.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\main.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\MainApplication.cpp" />
-    <ClCompile Include="..\..\Source\Timeborne\Misc\LanConnection.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Misc\ScreenResolution.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Misc\UserConfiguration.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanClient.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanConnection.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Networking\LanServer.cpp" />
+    <ClCompile Include="..\..\Source\Timeborne\Networking\NetworkingCommon.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.cpp" />
     <ClCompile Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.cpp" />
@@ -192,9 +195,13 @@
     <ClInclude Include="..\..\Source\Timeborne\MainApplication.h" />
     <ClInclude Include="..\..\Source\Timeborne\Math\Math.h" />
     <ClInclude Include="..\..\Source\Timeborne\Math\SqrtExtendedIntegerRing.hpp" />
-    <ClInclude Include="..\..\Source\Timeborne\Misc\LanConnection.h" />
     <ClInclude Include="..\..\Source\Timeborne\Misc\ScreenResolution.h" />
     <ClInclude Include="..\..\Source\Timeborne\Misc\UserConfiguration.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanClient.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanCommon.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanConnection.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Networking\LanServer.h" />
+    <ClInclude Include="..\..\Source\Timeborne\Networking\NetworkingCommon.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\GameObjects\GameObjectRenderer.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\Hud\HudRectangleRenderer.h" />
     <ClInclude Include="..\..\Source\Timeborne\Render\ParticleSystem\ParticleSystem.h" />
@@ -386,7 +393,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include;$(ProjectDir)/../../Internal/Framework/External/asio-1.18.1/include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
@@ -429,7 +436,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/../../;$(ProjectDir)/../../Source;$(ProjectDir)/../../External;$(ProjectDir)/../../Internal/Framework/Source/Common;$(ProjectDir)/../../Internal/Framework/Source/Framework2;$(ProjectDir)/../../Internal/Framework;$(ProjectDir)/../../Internal/Framework/External;$(ProjectDir)/../../External/nuklear/;$(ProjectDir)/../../External/nuklear/demo/d3d11;$(ProjectDir)/../../External/cxxopts/include;$(ProjectDir)/../../Internal/Framework/External/asio-1.18.1/include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>

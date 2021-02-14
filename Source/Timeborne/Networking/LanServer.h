@@ -1,4 +1,4 @@
-// Timeborne/Misc/LanConnection.h
+// Timeborne/Networking/LanServer.h
 
 #pragma once
 
@@ -8,9 +8,10 @@
 #include <Core/DataStructures/SimpleTypeVector.hpp>
 
 #include <atomic>
+#include <cstdint>
+#include <map>
 #include <memory>
 #include <mutex>
-#include <thread>
 #include <vector>
 
 class LanServer
@@ -23,7 +24,7 @@ class LanServer
 		uint32_t ClientId;
 		std::unique_ptr<Core::ServerSocket> ReceiveSocket;
 		std::unique_ptr<Core::ServerSocket> SendSocket;
-		
+
 		// unique_ptr makes sure that only pointers are copied.
 		std::vector<std::unique_ptr<Core::ByteVectorU>> SendBuffers;
 
@@ -38,6 +39,13 @@ class LanServer
 
 	std::mutex m_Mutex;
 
+private: // Dispatch socket.
+
+	std::unique_ptr<Core::ServerSocket> m_DispatchSocket;
+	std::mutex m_DispatchSocketMutex;
+	std::atomic_bool m_Dispatching = false;
+
+	void DispatcherStartCallback(const std::error_code& errorCode);
 	bool ConnectSocket(uint32_t clientIndex, uint16_t port, std::unique_ptr<Core::ServerSocket>& socket);
 
 public: // Only for internal calls.
@@ -54,36 +62,4 @@ public:
 	void Reset();
 	void Start();
 	void Send(uint32_t clientId, const void* buffer, size_t size);
-};
-
-class LanClient
-{
-	std::unique_ptr<Core::ClientSocket> m_ConnectSocket;
-
-public:
-
-	LanClient();
-	~LanClient();
-
-	void Reset();
-	void ListServers();
-	void Start();
-};
-
-class LanConnection
-{
-	LanServer m_Server;
-	LanClient m_Client;
-
-public:
-
-	LanConnection();
-	~LanConnection();
-
-	void Reset();
-
-	LanServer& GetServer();
-	LanClient& GetClient();
-
-	static void CheckEndianness();
 };

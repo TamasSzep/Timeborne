@@ -4,6 +4,7 @@
 
 #include <Timeborne/GUI/NuklearHelper.h>
 #include <Timeborne/GUI/TimeborneGUI.h>
+#include <Timeborne/Networking/NetworkingCommon.h>
 #include <Timeborne/MainApplication.h>
 
 MultiPlayerScreen::MultiPlayerScreen()
@@ -20,6 +21,9 @@ void MultiPlayerScreen::Reset()
 	m_NextScreen = ApplicationScreens::MultiPlayer;
 	m_HasConsole = false;
 	m_NewGameData = {};
+
+	m_IsHostingOnLAN = false;
+	m_IsConnectingOnLAN = false;
 }
 
 void MultiPlayerScreen::Enter(const ComponentRenderContext& context)
@@ -28,7 +32,7 @@ void MultiPlayerScreen::Enter(const ComponentRenderContext& context)
 
 	Reset();
 
-	LanConnection::CheckEndianness();
+	Networking_CheckEndianness();
 
 	EnterMainTab(MainTabs::HostOnLAN);
 }
@@ -128,11 +132,8 @@ void MultiPlayerScreen::EnterMainTab(MainTabs tab)
 {
 	m_LanConnection.Reset();
 
-	switch (tab)
-	{
-		case MainTabs::HostOnLAN: m_LanConnection.GetServer().Start(); break;
-		case MainTabs::ConnectOnLAN: m_LanConnection.GetClient().ListServers(); break;
-	}
+	m_IsHostingOnLAN = false;
+	m_IsConnectingOnLAN = false;
 
 	m_SelectedGUITab = tab;
 }
@@ -142,6 +143,21 @@ void MultiPlayerScreen::EnterMainTab(MainTabs tab)
 void MultiPlayerScreen::CreateHostOnLANGUI(const ComponentRenderContext& context)
 {
 	auto ctx = (nk_context*)context.NuklearContext;
+
+	nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1); // Empty line.
+
+	nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1);
+	if (nk_button_label(ctx, "Host on LAN") != 0)
+	{
+		m_IsHostingOnLAN = true;
+		m_LanConnection.GetServer().Start();
+	}
+
+	if (m_IsHostingOnLAN)
+	{
+		nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1);
+		nk_label(ctx, "Hosting on LAN...", NK_TEXT_LEFT);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,4 +165,19 @@ void MultiPlayerScreen::CreateHostOnLANGUI(const ComponentRenderContext& context
 void MultiPlayerScreen::CreateConnectOnLANGUI(const ComponentRenderContext& context)
 {
 	auto ctx = (nk_context*)context.NuklearContext;
+
+	nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1); // Empty line.
+
+	nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1);
+	if (nk_button_label(ctx, "Connect on LAN") != 0)
+	{
+		m_IsConnectingOnLAN = true;
+		m_LanConnection.GetClient().Start();
+	}
+
+	if (m_IsConnectingOnLAN)
+	{
+		nk_layout_row_static(ctx, c_ButtonSize.y, (int)c_ButtonSize.x, 1);
+		nk_label(ctx, "Connecting on LAN...", NK_TEXT_LEFT);
+	}
 }
